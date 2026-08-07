@@ -270,7 +270,7 @@ $(document).ready(function(){
     <tr>
       <td><?php Translate("User authentication file (SVNUserDigestFile)"); ?><br><small><b><?php Translate("Example"); ?>:</b> <?php PrintStringValue("SVNUserDigestFileEx"); ?></small></td>
       <td>
-        <input type="text" name="SVNUserDigestFile" id="SVNUserDigestFile" value="<?php PrintStringValue("SVNUserDigestFileEx"); ?>">
+        <input type="text" name="SVNUserDigestFile" id="SVNUserDigestFile" value="<?php PrintStringValue("SVNUserDigestFile"); ?>">
         <input type="button" id="SVNUserDigestFileTest" value="<?php Translate("Test"); ?>">
         <span id="SVNUserDigestFileTestResult" style="display:none;"></span>
       </td>
