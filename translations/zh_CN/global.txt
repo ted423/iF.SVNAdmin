@@ -1,6 +1,6 @@
 "Language","语言"
 "Translated by","翻译者"
-"Repositories","代码仓库"
+"Repositories","仓库"
 "Users","用户"
 "Groups","组"
 "Memberships","关系"

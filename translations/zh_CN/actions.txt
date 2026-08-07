@@ -50,8 +50,8 @@
 "The following group(s) could not been deleted","下列组无法被删除."
 
 # delete_repository.php
-"You have to select at least one repository.","请至少选择一个代码仓库."
-"The following repository(s) could not been deleted:","下列代码仓库无法被删除:"
+"You have to select at least one repository.","请至少选择一个仓库."
+"The following repository(s) could not been deleted:","下列仓库无法被删除:"
 
 # delete_user.php
 "The following user's has been deleted:","已删除下列用户:"

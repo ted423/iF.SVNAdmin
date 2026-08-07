@@ -3,6 +3,6 @@
 "New access-path data","新路径数据"
 "Path","路径"
 "Syntax","语法:"
-"An "/" as access path holds permissions over all repositories.",""/" 作为路径，会包含所有代码仓库的权限 ."
+"An "/" as access path holds permissions over all repositories.",""/" 作为路径，会包含所有仓库的权限 ."
 "Browse...","浏览..."
 "Back to overview","返回起始页"

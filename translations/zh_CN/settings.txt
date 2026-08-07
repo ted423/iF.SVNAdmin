@@ -8,7 +8,7 @@
 "User authentication","用户身份验证"
 "User authentication file (SVNUserFile)","用户身份验证文件 (SVNUserFile)"
 "Subversion settings","Subversion 设置相关"
-"Parent directory of the repositories (SVNParentPath)","代码仓库的父目录 (SVNParentPath)"
+"Parent directory of the repositories (SVNParentPath)","仓库的父目录 (SVNParentPath)"
 "Subversion client executable","'svn.exe' 或 'svn'可执行文件："
 "Subversion admin executable","'svnadmin.exe' 或 'svnadmin' 可执行文件："
 "LDAP connection information","LDAP 连接信息相关"
