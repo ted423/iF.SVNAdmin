@@ -74,6 +74,7 @@ class IF_HtPasswd
     {
       case 1: return "The user authentication file does not exist.";
       case 2: return "No READ permission on the user authentication file.";
+      case 3: return "The path to the user authentication file is empty.";
       case 10: return "The user already exists.";
       case 11: return "The user does not exist.";
       default: return "No error occured.";
@@ -319,6 +320,13 @@ class IF_HtPasswd
     if( $filename == NULL )
     {
       $filename = $this->m_userfile;
+    }
+
+    // Guard: To prevent fopen() from throwing an error due to an empty path.
+    if (empty($filename) || trim($filename) === "")
+    {
+      $this->m_errno = 3;
+      return false;
     }
 
     // Open file and write the array of users to it.

@@ -114,6 +114,37 @@ if (check_request_var("firststart"))
 
 if (check_request_var("save"))
 {
+	// --- Front-end/back-end validation: Prevent fopen() from throwing an error due to an empty path. ---
+	$validationErrors = array();
+
+	if ($pUserViewProviderType === "passwd" || $pUserEditProviderType === "passwd") {
+		if (empty($pSVNUserFile) || trim($pSVNUserFile) === "") {
+			$validationErrors[] = $appTR->tr("User authentication file (SVNUserFile) path cannot be empty when using passwd provider.");
+		}
+	}
+
+	if ($pUserViewProviderType === "digest" || $pUserEditProviderType === "digest") {
+		if (empty($pSVNUserDigestFile) || trim($pSVNUserDigestFile) === "") {
+			$validationErrors[] = $appTR->tr("User digest authentication file (SVNUserDigestFile) path cannot be empty when using digest provider.");
+		}
+	}
+
+	if ($pGroupViewProviderType === "svnauthfile" || $pGroupEditProviderType === "svnauthfile") {
+		if (empty($pSVNAuthFile) || trim($pSVNAuthFile) === "") {
+			$validationErrors[] = $appTR->tr("Subversion authorization file (SVNAuthFile) path cannot be empty when using svnauthfile provider.");
+		}
+	}
+
+	if (!empty($validationErrors)) {
+		foreach ($validationErrors as $err) {
+			$appEngine->addException(new Exception($err));
+		}
+		// Skip subsequent steps such as setadmin and directly render the page to display the error.
+		ProcessTemplate("settings/backend.html.php");
+		exit(0);
+	}
+	// --- Done ---
+
 	$cfgEngine->setValue("Engine:Providers", "UserViewProviderType", $pUserViewProviderType);
 	$cfgEngine->setValue("Engine:Providers", "UserEditProviderType", $pUserEditProviderType);
 	$cfgEngine->setValue("Engine:Providers", "GroupViewProviderType", $pGroupViewProviderType);

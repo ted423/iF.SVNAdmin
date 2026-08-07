@@ -69,7 +69,63 @@ $(document).ready(function(){
   });
 <?php endif; ?>
 
+  // ============================================================
+  // Front-end form validation: Prevent back-end fopen() errors due to empty paths.
+  // ============================================================
+  $("form").submit(function(e) {
+    var errors = [];
+
+    // Get each provider type
+    var userViewType = $("#UserViewProviderType").val();
+    var userEditType = $("#UserEditProviderType").val();
+    var groupViewType = $("#GroupViewProviderType").val();
+    var groupEditType = $("#GroupEditProviderType").val();
+
+    if (userViewType === "passwd" || userEditType === "passwd") {
+      var svnUserFile = $.trim($("#SVNUserFile").val());
+      if (svnUserFile === "") {
+        errors.push("<?php Translate("User authentication file (SVNUserFile) path cannot be empty when using passwd provider."); ?>");
+      }
+    }
+
+    if (userViewType === "digest" || userEditType === "digest") {
+      var svnUserDigestFile = $.trim($("#SVNUserDigestFile").val());
+      if (svnUserDigestFile === "") {
+        errors.push("<?php Translate("User digest authentication file (SVNUserDigestFile) path cannot be empty when using digest provider."); ?>");
+      }
+    }
+
+    if (groupViewType === "svnauthfile" || groupEditType === "svnauthfile") {
+      var svnAuthFile = $.trim($("#SVNAuthFile").val());
+      if (svnAuthFile === "") {
+        errors.push("<?php Translate("Subversion authorization file (SVNAuthFile) path cannot be empty when using svnauthfile provider."); ?>");
+      }
+    }
+
+    if (errors.length > 0) {
+      e.preventDefault();
+
+      // Remove existing error messages
+      $(".top-message-frontend-error").remove();
+
+      var errorHtml = '<div class="top-message top-message-error top-message-frontend-error"><ul>';
+      for (var i = 0; i < errors.length; i++) {
+        errorHtml += "<li>" + errors[i] + "</li>";
+      }
+      errorHtml += "</ul></div>";
+
+      $("form").before(errorHtml);
+
+      $("html, body").animate({
+        scrollTop: $(".top-message-frontend-error").offset().top - 20
+      }, 300);
+
+      return false;
+    }
+  });
+
 });
+
 </script>
 
 <h1><?php Translate("Settings"); ?></h1>
