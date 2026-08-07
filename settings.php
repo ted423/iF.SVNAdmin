@@ -567,6 +567,9 @@ $cfgTpl->loadFromFile("data/config.tpl.ini");
 // SVNAuthFile
 $svnAuthFile = $cfgEngine->getValue("Subversion","SVNAuthFile");
 $svnAuthFileEx = $cfgTpl->getValue("Subversion","SVNAuthFile");
+if (empty($svnAuthFile) && $isFirstStart) {
+	$svnAuthFile = $svnAuthFileEx;
+}
 SetValue("SVNAuthFile", $svnAuthFile);
 SetValue("SVNAuthFileEx", $svnAuthFileEx);
 
@@ -612,6 +615,9 @@ SetValue("repositoryEditProviderTypes", $repositoryEditProviderTypes);
 // Passwd file.
 $svnUserFile = $cfgEngine->getValue("Users:passwd","SVNUserFile");
 $svnUserFileEx = $cfgTpl->getValue("Users:passwd","SVNUserFile");
+if (empty($svnUserFile) && $isFirstStart) {
+	$svnUserFile = $svnUserFileEx;
+}
 SetValue("SVNUserFile", $svnUserFile);
 SetValue("SVNUserFileEx", $svnUserFileEx);
 
@@ -620,6 +626,9 @@ $svnUserDigestFile = $cfgEngine->getValue("Users:digest","SVNUserDigestFile");
 $svnUserDigestFileEx = $cfgTpl->getValue("Users:digest","SVNUserDigestFile");
 $svnDigestRealm = $cfgEngine->getValue("Users:digest","SVNDigestRealm");
 $svnDigestRealmEx = $cfgTpl->getValue("Users:digest","SVNDigestRealm");
+if (empty($svnUserDigestFile) && $isFirstStart) {
+	$svnUserDigestFile = $svnUserDigestFileEx;
+}
 SetValue("SVNUserDigestFile", $svnUserDigestFile);
 SetValue("SVNUserDigestFileEx", $svnUserDigestFileEx);
 SetValue("SVNDigestRealm", $svnDigestRealm);
@@ -632,6 +641,15 @@ $svnExecutable = $cfgEngine->getValue("Repositories:svnclient","SvnExecutable");
 $svnExecutableEx = $cfgTpl->getValue("Repositories:svnclient","SvnExecutable");
 $svnAdminExecutable = $cfgEngine->getValue("Repositories:svnclient","SvnAdminExecutable");
 $svnAdminExecutableEx = $cfgTpl->getValue("Repositories:svnclient","SvnAdminExecutable");
+if (empty($svnParentPath) && $isFirstStart) {
+	$svnParentPath = $svnParentPathEx;
+}
+if (empty($svnExecutable) && $isFirstStart) {
+	$svnExecutable = $svnExecutableEx;
+}
+if (empty($svnAdminExecutable) && $isFirstStart) {
+	$svnAdminExecutable = $svnAdminExecutableEx;
+}
 SetValue("SVNParentPath", $svnParentPath);
 SetValue("SVNParentPathEx", $svnParentPathEx);
 SetValue("SvnExecutable", $svnExecutable);
