@@ -4,3 +4,4 @@
 "Username","用户名"
 "Password","密码"
 "Re-type password","确认密码"
+"Back to overview","返回概览"
