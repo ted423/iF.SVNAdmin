@@ -297,6 +297,7 @@ class RepositoryEditProvider implements \svnadmin\core\interfaces\IRepositoryEdi
 					$h->name = $item;
 					$h->encodedName = rawurlencode($item);
 					$h->size = filesize($fullPath);
+					$h->isTemplate = (substr($item, -5) === '.tmpl');
 					$ret[] = $h;
 				}
 			}
@@ -340,6 +341,9 @@ class RepositoryEditProvider implements \svnadmin\core\interfaces\IRepositoryEdi
 	{
 		if (!$this->isValidHookName($hookName)) {
 			throw new \Exception(tr("Invalid hook name."));
+		}
+		if (substr($hookName, -5) === '.tmpl') {
+			throw new \Exception(tr("Subversion hook templates are read-only."));
 		}
 
 		$hooksPath = $this->getHooksPath($oRepository);

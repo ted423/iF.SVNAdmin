@@ -61,6 +61,8 @@ $hookList = array();
 $selectedHook = null;
 $hookContent = '';
 $isNew = true;
+$selectedHookReadOnly = false;
+$hasSelectedHook = false;
 $canEdit = IsProviderActive(PROVIDER_REPOSITORY_EDIT) && HasAccess(ACL_MOD_REPO, ACL_ACTION_ADD);
 
 try {
@@ -68,6 +70,8 @@ try {
 		$selectedHook = rawurldecode($varSelectedHookEnc);
 		$hookContent = $engine->getRepositoryEditProvider()->getHookContent($oR, $selectedHook);
 		$isNew = false;
+		$hasSelectedHook = true;
+		$selectedHookReadOnly = (substr($selectedHook, -5) === '.tmpl');
 	}
 
 	$hookList = $engine->getRepositoryEditProvider()->listHooks($oR);
@@ -81,6 +85,8 @@ SetValue('HookList', $hookList);
 SetValue('SelectedHook', $selectedHook);
 SetValue('HookContent', $hookContent);
 SetValue('IsNew', $isNew);
+SetValue('HasSelectedHook', $hasSelectedHook);
+SetValue('SelectedHookReadOnly', $selectedHookReadOnly);
 SetValue('CanEdit', $canEdit);
 ProcessTemplate("repository/repositoryhooks.html.php");
 ?>

@@ -7,7 +7,7 @@
   <a href="repositoryview.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>"><?php print(GetValue("Repository")->getName()); ?></a>
 </h2>
 
-<?php if (GetBoolValue("CanEdit")) : ?>
+<?php if (GetBoolValue("CanEdit") || GetBoolValue("HasSelectedHook")) : ?>
 <form action="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>" method="POST">
 <table class="datatableinline">
 <colgroup>
@@ -40,15 +40,20 @@
   <tr>
     <td valign="top"><?php Translate("Hook content"); ?>:</td>
     <td>
-      <textarea name="hook_content" rows="20" cols="80" style="font-family: monospace;"><?php PrintStringValue("HookContent"); ?></textarea>
+      <textarea name="hook_content" rows="20" cols="80" style="font-family: monospace;" <?php if (GetBoolValue("SelectedHookReadOnly")) { print('readonly="readonly"'); } ?>><?php PrintStringValue("HookContent"); ?></textarea>
+      <?php if (GetBoolValue("SelectedHookReadOnly")) : ?>
+      <p><i><?php Translate("This is a Subversion hook template and cannot be edited."); ?></i></p>
+      <?php endif; ?>
     </td>
   </tr>
+  <?php if (!GetBoolValue("SelectedHookReadOnly")) : ?>
   <tr>
     <td></td>
     <td>
       <input type="submit" name="save" value="<?php Translate("Save hook"); ?>">
     </td>
   </tr>
+  <?php endif; ?>
 </tbody>
 </table>
 </form>
@@ -73,7 +78,11 @@
     <td align="right"><?php print($hook->size); ?></td>
     <?php if (GetBoolValue("CanEdit")) : ?>
     <td align="center">
+      <?php if ($hook->isTemplate) : ?>
+      <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php Translate("View"); ?></a>
+      <?php else : ?>
       <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php Translate("Edit"); ?></a>
+      <?php endif; ?>
     </td>
     <?php endif; ?>
   </tr>
