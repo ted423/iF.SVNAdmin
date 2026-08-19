@@ -40,7 +40,6 @@ $engine->checkUserAuthentication(true, ACL_MOD_REPO, ACL_ACTION_ADD);
 $varParentIdentifierEnc = get_request_var('pi');
 $varRepoEnc = get_request_var('r');
 $hookName = get_request_var('hook_name');
-$hookNameCustom = get_request_var('hook_name_custom');
 $hookContent = get_request_var('hook_content');
 
 $varParentIdentifier = rawurldecode($varParentIdentifierEnc);
@@ -49,10 +48,6 @@ $varRepo = rawurldecode($varRepoEnc);
 //
 // Validation
 //
-
-if (!empty($hookNameCustom)) {
-	$hookName = $hookNameCustom;
-}
 
 if ($hookName == NULL) {
 	$engine->addException(new ValidationException(tr("You have to fill out all fields.")));

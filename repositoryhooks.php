@@ -57,7 +57,8 @@ if (check_request_var('save')) {
 
 $oR = new \svnadmin\core\entities\Repository($varRepo, $varParentIdentifier);
 
-$hookList = array();
+$activeHookList = array();
+$templateHookList = array();
 $selectedHook = null;
 $hookContent = '';
 $isNew = true;
@@ -75,13 +76,21 @@ try {
 	}
 
 	$hookList = $engine->getRepositoryEditProvider()->listHooks($oR);
+	foreach ($hookList as $hook) {
+		if ($hook->isTemplate) {
+			$templateHookList[] = $hook;
+		} else {
+			$activeHookList[] = $hook;
+		}
+	}
 }
 catch (Exception $ex) {
 	$engine->addException($ex);
 }
 
 SetValue('Repository', $oR);
-SetValue('HookList', $hookList);
+SetValue('ActiveHookList', $activeHookList);
+SetValue('TemplateHookList', $templateHookList);
 SetValue('SelectedHook', $selectedHook);
 SetValue('HookContent', $hookContent);
 SetValue('IsNew', $isNew);

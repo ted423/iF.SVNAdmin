@@ -16,11 +16,10 @@
 </colgroup>
 <tbody>
   <tr>
-    <td><?php Translate("Hook name"); ?>:</td>
-    <td>
+    <td style="vertical-align: middle;"><?php Translate("Hook name"); ?>:</td>
+    <td style="vertical-align: middle;">
       <?php if (GetBoolValue("IsNew")) : ?>
-      <select name="hook_name">
-        <option value=""><?php Translate("Custom"); ?></option>
+      <select name="hook_name" style="height: 22px;">
         <option value="start-commit">start-commit</option>
         <option value="pre-commit">pre-commit</option>
         <option value="post-commit">post-commit</option>
@@ -31,9 +30,8 @@
         <option value="pre-revprop-change">pre-revprop-change</option>
         <option value="post-revprop-change">post-revprop-change</option>
       </select>
-      <input type="text" name="hook_name_custom" value="" size="30">
       <?php else : ?>
-      <input type="text" name="hook_name" value="<?php print(GetValue("SelectedHook")); ?>" readonly="readonly" size="40">
+      <input type="text" name="hook_name" value="<?php print(GetValue("SelectedHook")); ?>" readonly="readonly" size="40" style="height: 22px;">
       <?php endif; ?>
     </td>
   </tr>
@@ -46,7 +44,7 @@
       <?php endif; ?>
     </td>
   </tr>
-  <?php if (!GetBoolValue("SelectedHookReadOnly")) : ?>
+  <?php if (GetBoolValue("CanEdit") && !GetBoolValue("SelectedHookReadOnly")) : ?>
   <tr>
     <td></td>
     <td>
@@ -72,22 +70,47 @@
   </tr>
 </thead>
 <tbody>
-  <?php foreach (GetArrayValue("HookList") as $hook) : ?>
+  <?php foreach (GetArrayValue("ActiveHookList") as $hook) : ?>
   <tr>
     <td><?php print($hook->name); ?></td>
     <td align="right"><?php print($hook->size); ?></td>
     <?php if (GetBoolValue("CanEdit")) : ?>
     <td align="center">
-      <?php if ($hook->isTemplate) : ?>
-      <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php Translate("View"); ?></a>
-      <?php else : ?>
       <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php Translate("Edit"); ?></a>
-      <?php endif; ?>
     </td>
     <?php endif; ?>
   </tr>
   <?php endforeach; ?>
 </tbody>
 </table>
+
+<?php if (count(GetArrayValue("TemplateHookList")) > 0) : ?>
+<h3><?php Translate("Hook templates"); ?></h3>
+
+<table class="datatable">
+<thead>
+  <tr>
+    <th><?php Translate("Hook name"); ?></th>
+    <th width="100"><?php Translate("Size"); ?></th>
+    <?php if (GetBoolValue("CanEdit")) : ?>
+    <th width="80"><?php Translate("Options"); ?></th>
+    <?php endif; ?>
+  </tr>
+</thead>
+<tbody>
+  <?php foreach (GetArrayValue("TemplateHookList") as $hook) : ?>
+  <tr>
+    <td><?php print($hook->name); ?></td>
+    <td align="right"><?php print($hook->size); ?></td>
+    <?php if (GetBoolValue("CanEdit")) : ?>
+    <td align="center">
+      <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php Translate("View"); ?></a>
+    </td>
+    <?php endif; ?>
+  </tr>
+  <?php endforeach; ?>
+</tbody>
+</table>
+<?php endif; ?>
 
 <?php GlobalFooter(); ?>
