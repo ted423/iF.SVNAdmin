@@ -682,6 +682,12 @@ $ldapUserSearchFilter = $cfgEngine->getValue("Users:ldap","SearchFilter");
 $ldapUserSearchFilterEx = $cfgTpl->getValue("Users:ldap","SearchFilter");
 $ldapUserAttributes = $cfgEngine->getValue("Users:ldap","Attributes");
 $ldapUserAttributesEx = $cfgTpl->getValue("Users:ldap","Attributes");
+if ($isFirstStart)
+{
+	$ldapUserBaseDn = "";
+	$ldapUserSearchFilter = "";
+	$ldapUserAttributes = "";
+}
 SetValue("LdapUserBaseDn", $ldapUserBaseDn);
 SetValue("LdapUserBaseDnEx", $ldapUserBaseDnEx);
 SetValue("LdapUserSearchFilter", $ldapUserSearchFilter);

@@ -375,16 +375,16 @@ $(document).ready(function(){
   <tbody>
     <tr>
       <td><?php Translate("Base DN"); ?><br><small><b><?php Translate("Example"); ?>:</b> <?php PrintStringValue("LdapUserBaseDnEx"); ?></small></td>
-      <td><input type="text" name="LdapUserBaseDn" id="LdapUserBaseDn" value="<?php PrintStringValue("LdapUserBaseDn"); ?>"></td>
+      <td><input type="text" name="LdapUserBaseDn" id="LdapUserBaseDn" value="<?php PrintStringValue("LdapUserBaseDn"); ?>" placeholder="<?php PrintStringValue("LdapUserBaseDnEx"); ?>"></td>
     </tr>
     <tr>
       <td><?php Translate("Search filter"); ?><br><small><b><?php Translate("Example"); ?>:</b> <?php PrintStringValue("LdapUserSearchFilterEx"); ?></small></td>
-      <td><input type="text" name="LdapUserSearchFilter" id="LdapUserSearchFilter" value="<?php PrintStringValue("LdapUserSearchFilter"); ?>"></td>
+      <td><input type="text" name="LdapUserSearchFilter" id="LdapUserSearchFilter" value="<?php PrintStringValue("LdapUserSearchFilter"); ?>" placeholder="<?php PrintStringValue("LdapUserSearchFilterEx"); ?>"></td>
     </tr>
     <tr>
       <td><?php Translate("Attributes"); ?><br><small><b><?php Translate("Example"); ?>:</b> <?php PrintStringValue("LdapUserAttributesEx"); ?></small></td>
       <td>
-        <input type="text" name="LdapUserAttributes" id="LdapUserAttributes" value="<?php PrintStringValue("LdapUserAttributes"); ?>">
+        <input type="text" name="LdapUserAttributes" id="LdapUserAttributes" value="<?php PrintStringValue("LdapUserAttributes"); ?>" placeholder="<?php PrintStringValue("LdapUserAttributesEx"); ?>">
         <input type="button" id="LdapUserTest" value="<?php Translate("Test"); ?>">
         <span id="LdapUserTestResult" style="display:none;"></span>
       </td>
