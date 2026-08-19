@@ -378,6 +378,7 @@ function updateSettingsSelection()
   else if($("#UserViewProviderType").val() == "passwd")
   {
     $("#tbl_ldapconnection").hide(speed);
+    $("#tbl_ldapuser").hide(speed);
     $("#tbl_userdigestfile").hide(speed);
     $("#tbl_userfile").show(speed);
     $("#UserEditProviderType").removeAttr("disabled");
