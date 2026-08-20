@@ -74,7 +74,7 @@ try {
 		SetValue('ShowDumpOption', true);
 	}
 	if ($engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)
-		&& $engine->isCurrentUserAdmin())
+		&& $engine->hasPermission(ACL_MOD_REPO, ACL_ACTION_VIEW))
 	{
 		$showOptions = true;
 		SetValue('ShowHooksOption', true);

@@ -38,7 +38,7 @@
   <tr>
     <td valign="top"><?php Translate("Hook content"); ?>:</td>
     <td>
-      <textarea name="hook_content" rows="20" cols="80" style="font-family: monospace;" <?php if (GetBoolValue("SelectedHookReadOnly")) { print('readonly="readonly"'); } ?>><?php PrintStringValue("HookContent"); ?></textarea>
+      <textarea name="hook_content" rows="20" cols="80" style="font-family: monospace;" <?php if (GetBoolValue("SelectedHookReadOnly") || !GetBoolValue("CanEdit")) { print('readonly="readonly"'); } ?>><?php PrintStringValue("HookContent"); ?></textarea>
       <?php if (GetBoolValue("SelectedHookReadOnly")) : ?>
       <p><i><?php Translate("This is a Subversion hook template and cannot be edited."); ?></i></p>
       <?php endif; ?>
@@ -64,9 +64,7 @@
   <tr>
     <th><?php Translate("Hook name"); ?></th>
     <th width="100"><?php Translate("Size"); ?></th>
-    <?php if (GetBoolValue("CanEdit")) : ?>
     <th width="80"><?php Translate("Options"); ?></th>
-    <?php endif; ?>
   </tr>
 </thead>
 <tbody>
@@ -74,11 +72,9 @@
   <tr>
     <td><?php print($hook->name); ?></td>
     <td align="right"><?php print($hook->size); ?></td>
-    <?php if (GetBoolValue("CanEdit")) : ?>
     <td align="center">
-      <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php Translate("Edit"); ?></a>
+      <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php if (GetBoolValue("CanEdit")) { Translate("Edit"); } else { Translate("View"); } ?></a>
     </td>
-    <?php endif; ?>
   </tr>
   <?php endforeach; ?>
 </tbody>
@@ -92,9 +88,7 @@
   <tr>
     <th><?php Translate("Hook name"); ?></th>
     <th width="100"><?php Translate("Size"); ?></th>
-    <?php if (GetBoolValue("CanEdit")) : ?>
     <th width="80"><?php Translate("Options"); ?></th>
-    <?php endif; ?>
   </tr>
 </thead>
 <tbody>
@@ -102,11 +96,9 @@
   <tr>
     <td><?php print($hook->name); ?></td>
     <td align="right"><?php print($hook->size); ?></td>
-    <?php if (GetBoolValue("CanEdit")) : ?>
     <td align="center">
       <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;hook=<?php print($hook->encodedName); ?>"><?php Translate("View"); ?></a>
     </td>
-    <?php endif; ?>
   </tr>
   <?php endforeach; ?>
 </tbody>

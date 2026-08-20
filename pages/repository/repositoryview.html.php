@@ -6,7 +6,7 @@
   : <?php PrintStringValue("CurrentPath"); ?>
 </p>
 <p>
-  <?php if (IsProviderActive(PROVIDER_REPOSITORY_EDIT) && IsAdministrator()) { ?>
+  <?php if (IsProviderActive(PROVIDER_REPOSITORY_EDIT) && HasAccess(ACL_MOD_REPO, ACL_ACTION_VIEW)) { ?>
   <a href="repositoryhooks.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>"><?php Translate("Hooks"); ?></a>
   <?php } ?>
 </p>

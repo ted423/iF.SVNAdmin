@@ -215,12 +215,6 @@ function HasAccess($module, $action)
 	return $appEngine->checkUserAccess($module, $action);
 }
 
-function IsAdministrator()
-{
-	global $appEngine;
-	return $appEngine->isCurrentUserAdmin();
-}
-
 function HasAppExceptions()
 {
 	global $appEngine;
