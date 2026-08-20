@@ -149,7 +149,7 @@ class AdUserViewProvider
         $E = \svnadmin\core\Engine::getInstance();
         $cfg = $E->getConfig();
 
-        $this->adLDAP = new \\adLDAP();
+        $this->adLDAP = new \adLDAP();
 
         $this->host_address = $cfg->getValue("Ldap", "HostAddress");
         $this->host_protocol_version = $cfg->getValue("Ldap", "ProtocolVersion");
