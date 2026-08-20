@@ -21,18 +21,18 @@ namespace svnadmin\core\interfaces;
 
 interface IPathsEditProvider extends IEditProvider
 {
-	// @Move to IProvider
-	public function reset();
+    // @Move to IProvider
+    public function reset();
 
-	public function createAccessPath($objAccessPath);
-	public function deleteAccessPath($objAccessPath);
+    public function createAccessPath($objAccessPath);
+    public function deleteAccessPath($objAccessPath);
 
-	public function assignGroupToAccessPath($objGroup, $objAccessPath, $objPermission);
-	public function removeGroupFromAccessPath($objGroup, $objAccessPath);
-	public function removeGroupFromAllAccessPaths($objGroup);
+    public function assignGroupToAccessPath($objGroup, $objAccessPath, $objPermission);
+    public function removeGroupFromAccessPath($objGroup, $objAccessPath);
+    public function removeGroupFromAllAccessPaths($objGroup);
 
-	public function assignUserToAccessPath($objUser, $objAccessPath, $objPermission);
-	public function removeUserFromAccessPath($objUser, $objAccessPath);
-	public function removeUserFromAllAccessPaths($objUser);
+    public function assignUserToAccessPath($objUser, $objAccessPath, $objPermission);
+    public function removeUserFromAccessPath($objUser, $objAccessPath);
+    public function removeUserFromAllAccessPaths($objUser);
 }
 ?>

@@ -41,16 +41,16 @@ namespace svnadmin\core\entities
     
     public function getVisibleName()
     {
-    	switch ($this->perm)
-    	{
-    		case Permission::$PERM_READ:
-    			return "Read-Only";
-    		case Permission::$PERM_READWRITE:
-    			return "Read-Write";
-    		case Permission::$PERM_NONE:
-    			return "No access";
-    	}
-    	return "Unknown";
+        switch ($this->perm)
+        {
+            case Permission::$PERM_READ:
+                return "Read-Only";
+            case Permission::$PERM_READWRITE:
+                return "Read-Write";
+            case Permission::$PERM_NONE:
+                return "No access";
+        }
+        return "Unknown";
     }
     
     public function getDescription()

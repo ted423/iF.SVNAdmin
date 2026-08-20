@@ -21,7 +21,7 @@ require_once("include/config.inc.php");
 
 if (!$appEngine->isAccessPathViewActive() || (!$appEngine->isUserViewActive() && !$appEngine->isGroupViewActive()))
 {
-	$appEngine->forwardInvalidModule(true);
+    $appEngine->forwardInvalidModule(true);
 }
 $appEngine->checkUserAuthentication(true, ACL_MOD_ACCESSPATH, ACL_ACTION_ASSIGN);
 $appTR->loadModule("permissionassign");
@@ -31,41 +31,41 @@ $appTR->loadModule("permissionassign");
 $assign = check_request_var('assign');
 if ($assign)
 {
-	$appEngine->handleAction('assign_usergrouptoaccesspath');
+    $appEngine->handleAction('assign_usergrouptoaccesspath');
 }
 
 // Basic view data.
-$users		= array();
-$groups		= array();
-$paths		= array();
+$users        = array();
+$groups        = array();
+$paths        = array();
 
 if ($appEngine->isUserViewActive() && $appEngine->checkUserAuthentication(false, ACL_MOD_USER, ACL_ACTION_VIEW))
 {
-	$users = $appEngine->getUserViewProvider()->getUsers();
-	usort($users, array('\svnadmin\core\entities\User',"compare"));
+    $users = $appEngine->getUserViewProvider()->getUsers();
+    usort($users, array('\svnadmin\core\entities\User',"compare"));
 }
 
 if ($appEngine->isGroupViewActive() && $appEngine->checkUserAuthentication(false, ACL_MOD_GROUP, ACL_ACTION_VIEW))
 {
-	$groups = $appEngine->getGroupViewProvider()->getGroups();
-	usort($groups, array('\svnadmin\core\entities\Group',"compare"));
+    $groups = $appEngine->getGroupViewProvider()->getGroups();
+    usort($groups, array('\svnadmin\core\entities\Group',"compare"));
 }
 
 if (true)
 {
-	$paths = $appEngine->getAccessPathViewProvider()->getPaths();
+    $paths = $appEngine->getAccessPathViewProvider()->getPaths();
 
-	// Filter access-paths for project-managers.
-	if ($appEngine->isAuthenticationActive())
-	{
-		$currentUsername = $appEngine->getSessionUsername();
-		if ($appEngine->getAclManager()->isUserAccessPathManager($currentUsername))
-		{
-			$paths = $appEngine->getAclManager()->filterAccessPathsList($currentUsername, $paths);
-		}
-	}
+    // Filter access-paths for project-managers.
+    if ($appEngine->isAuthenticationActive())
+    {
+        $currentUsername = $appEngine->getSessionUsername();
+        if ($appEngine->getAclManager()->isUserAccessPathManager($currentUsername))
+        {
+            $paths = $appEngine->getAclManager()->filterAccessPathsList($currentUsername, $paths);
+        }
+    }
 
-	usort($paths, array('\svnadmin\core\entities\AccessPath',"compare") );
+    usort($paths, array('\svnadmin\core\entities\AccessPath',"compare") );
 }
 
 SetValue("PermNone", \svnadmin\core\entities\Permission::$PERM_NONE);

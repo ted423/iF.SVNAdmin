@@ -6,8 +6,8 @@
     <?php if (IsProviderActive(PROVIDER_REPOSITORY_VIEW) && (HasAccess(ACL_MOD_REPO, ACL_ACTION_VIEW) || HasAccess(ACL_MOD_REPO, ACL_ACTION_ADD))) { ?>
     <li><a href="repositorylist.php"><?php Translate("Repositories"); ?></a>
       <ul class="ddm-sub">
-			<?php if (HasAccess(ACL_MOD_REPO, ACL_ACTION_VIEW)){?><li><a href="repositorylist.php"><?php Translate("List"); ?></a></li><?php } ?>
-			<?php if (IsProviderActive(PROVIDER_REPOSITORY_EDIT) && HasAccess(ACL_MOD_REPO, ACL_ACTION_ADD)){?><li><a href="repositorycreate.php"><?php Translate("Add"); ?></a></li><?php } ?>
+            <?php if (HasAccess(ACL_MOD_REPO, ACL_ACTION_VIEW)){?><li><a href="repositorylist.php"><?php Translate("List"); ?></a></li><?php } ?>
+            <?php if (IsProviderActive(PROVIDER_REPOSITORY_EDIT) && HasAccess(ACL_MOD_REPO, ACL_ACTION_ADD)){?><li><a href="repositorycreate.php"><?php Translate("Add"); ?></a></li><?php } ?>
       </ul>
     </li>
     <?php } ?>
@@ -21,7 +21,7 @@
     </li>
     <?php } ?>
 
-		<?php if (IsProviderActive(PROVIDER_GROUP_VIEW) && (HasAccess(ACL_MOD_GROUP, ACL_ACTION_VIEW) || HasAccess(ACL_MOD_GROUP, ACL_ACTION_ADD) || HasAccess(ACL_MOD_GROUP, ACL_ACTION_ASSIGN))) { ?>
+        <?php if (IsProviderActive(PROVIDER_GROUP_VIEW) && (HasAccess(ACL_MOD_GROUP, ACL_ACTION_VIEW) || HasAccess(ACL_MOD_GROUP, ACL_ACTION_ADD) || HasAccess(ACL_MOD_GROUP, ACL_ACTION_ASSIGN))) { ?>
     <li><a href="grouplist.php"><?php Translate("Groups"); ?></a>
       <ul class="ddm-sub">
       <?php if (HasAccess(ACL_MOD_GROUP, ACL_ACTION_VIEW)){?><li><a href="grouplist.php"><?php Translate("List"); ?></a></li><?php } ?>

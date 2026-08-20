@@ -26,13 +26,13 @@ include("include/config.inc.php");
 // Authentication disabled.
 if (!$appEngine->isAuthenticationActive() )
 {
-	$appEngine->forward(PAGE_HOME, null, true);
+    $appEngine->forward(PAGE_HOME, null, true);
 }
 
 // If the user is already logged in, we should redirect him to the index page.
 if ($appEngine->checkUserAuthentication(false))
 {
-	$appEngine->forward(PAGE_HOME, null, true);
+    $appEngine->forward(PAGE_HOME, null, true);
 }
 
 $appTR->loadModule("login");
@@ -42,7 +42,7 @@ $appTR->loadModule("login");
 //
 if (check_request_var("login"))
 {
-	$appEngine->handleAction("login_authentication");
+    $appEngine->handleAction("login_authentication");
 }
 
 //

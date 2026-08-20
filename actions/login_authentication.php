@@ -35,34 +35,34 @@ $loginpass = get_request_var('loginpass');
 
 if ($loginname == NULL || $loginpass == NULL)
 {
-	$appEngine->addException(new ValidationException(tr("You have to fill out all fields.")));
+    $appEngine->addException(new ValidationException(tr("You have to fill out all fields.")));
 }
 else
 {
-	try {
-		if ($appEngine->getAuthenticator() != null)
-		{
-			$u = new \svnadmin\core\entities\User($loginname, $loginname);
-			$authOK = $appEngine->getAuthenticator()->authenticate( $u, $loginpass );
-			if ($authOK)
-			{
-				// Set session variable which indicates that the user is logged in.
-				$_SESSION["svnadmin_username"] = $loginname;
-				$appEngine->forward(PAGE_HOME, null, true);
-			}
-			else
-			{
-				$appEngine->addException(new ValidationException(tr("Wrong user/password combination.")));
-			}
-		}
-		else
-		{
-			// Authentication is deactivated!
-			// ...
-		}
-	}
-	catch (Exception $ex) {
-		$appEngine->addException($ex);
-	}
+    try {
+        if ($appEngine->getAuthenticator() != null)
+        {
+            $u = new \svnadmin\core\entities\User($loginname, $loginname);
+            $authOK = $appEngine->getAuthenticator()->authenticate( $u, $loginpass );
+            if ($authOK)
+            {
+                // Set session variable which indicates that the user is logged in.
+                $_SESSION["svnadmin_username"] = $loginname;
+                $appEngine->forward(PAGE_HOME, null, true);
+            }
+            else
+            {
+                $appEngine->addException(new ValidationException(tr("Wrong user/password combination.")));
+            }
+        }
+        else
+        {
+            // Authentication is deactivated!
+            // ...
+        }
+    }
+    catch (Exception $ex) {
+        $appEngine->addException($ex);
+    }
 }
 ?>

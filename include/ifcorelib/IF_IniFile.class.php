@@ -86,27 +86,27 @@ class IF_IniFile
    */
   public function getValueAsBoolean($block, $key, $default=false)
   {
-	$v = $this->getValue($block, $key, $default);
+    $v = $this->getValue($block, $key, $default);
 
-	if ($v === 1
-		|| $v === "1"
-		|| strcasecmp($v, "true") === 0
-		|| strcasecmp($v, "yes") === 0
-		|| strcasecmp($v, "on") === 0
-		|| $v === true) {
-		return true;
-	}
-	
-	if ($v === 0
-		|| $v === "0"
-		|| strcasecmp($v, "false") === 0
-		|| strcasecmp($v, "no") === 0
-		|| strcasecmp($v, "off") === 0
-		|| $v === false) {
-		return false;
-	}
+    if ($v === 1
+        || $v === "1"
+        || strcasecmp($v, "true") === 0
+        || strcasecmp($v, "yes") === 0
+        || strcasecmp($v, "on") === 0
+        || $v === true) {
+        return true;
+    }
+    
+    if ($v === 0
+        || $v === "0"
+        || strcasecmp($v, "false") === 0
+        || strcasecmp($v, "no") === 0
+        || strcasecmp($v, "off") === 0
+        || $v === false) {
+        return false;
+    }
 
-	return $default;
+    return $default;
   }
 
   /**

@@ -51,14 +51,14 @@ namespace svnadmin\core\entities
 
     public function getManagersAsString()
     {
-    	if (!empty($this->managers) && is_array($this->managers))
-    	{
-    		return join(",", $this->managers);
-    	}
-    	else
-    	{
-    		return "-";
-    	}
+        if (!empty($this->managers) && is_array($this->managers))
+        {
+            return join(",", $this->managers);
+        }
+        else
+        {
+            return "-";
+        }
     }
 
     public function getEncodedPath()

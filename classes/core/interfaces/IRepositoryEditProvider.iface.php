@@ -21,42 +21,42 @@ namespace svnadmin\core\interfaces;
 
 interface IRepositoryEditProvider extends IEditProvider
 {
-	/**
-	 * Creates a new repository.
-	 *
-	 * @param \svnadmin\core\entities\Repository   $oRepository
-	 * @param string $type The repository type (fsfs or bdb)
-	 *
-	 * @return bool
-	 */
-	public function create(\svnadmin\core\entities\Repository $oRepository, $type);
+    /**
+     * Creates a new repository.
+     *
+     * @param \svnadmin\core\entities\Repository   $oRepository
+     * @param string $type The repository type (fsfs or bdb)
+     *
+     * @return bool
+     */
+    public function create(\svnadmin\core\entities\Repository $oRepository, $type);
 
-	/**
-	 * Deletes an existing repository.
-	 *
-	 * @param \svnadmin\core\entities\Repository $oRepository
-	 *
-	 * @return bool
-	 */
-	public function delete(\svnadmin\core\entities\Repository $oRepository);
+    /**
+     * Deletes an existing repository.
+     *
+     * @param \svnadmin\core\entities\Repository $oRepository
+     *
+     * @return bool
+     */
+    public function delete(\svnadmin\core\entities\Repository $oRepository);
 
-	/**
-	 * Creates a new folder in the repository (including parents of folder).
-	 *
-	 * @param \svnadmin\core\entities\Repository $oRepository
-	 * @param array $path Paths to the folders which should be created.
-	 *
-	 * @return bool
-	 */
-	public function mkdir(\svnadmin\core\entities\Repository $oRepository, array $paths);
-	
-	/**
-	 * Dumps a repository file system content to STDOUT (Browser).
-	 * 
-	 * @param \svnadmin\core\entities\Repository $oRepository
-	 * 
-	 * @return bool
-	 */
-	public function dump(\svnadmin\core\entities\Repository $oRepository);
+    /**
+     * Creates a new folder in the repository (including parents of folder).
+     *
+     * @param \svnadmin\core\entities\Repository $oRepository
+     * @param array $path Paths to the folders which should be created.
+     *
+     * @return bool
+     */
+    public function mkdir(\svnadmin\core\entities\Repository $oRepository, array $paths);
+    
+    /**
+     * Dumps a repository file system content to STDOUT (Browser).
+     * 
+     * @param \svnadmin\core\entities\Repository $oRepository
+     * 
+     * @return bool
+     */
+    public function dump(\svnadmin\core\entities\Repository $oRepository);
 }
 ?>

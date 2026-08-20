@@ -18,7 +18,7 @@
  * along with this program.
  */
 if (!defined('ACTION_HANDLING')) {
-	die("HaHa!");
+    die("HaHa!");
 }
 
 $engine = \svnadmin\core\Engine::getInstance();
@@ -28,8 +28,8 @@ $engine = \svnadmin\core\Engine::getInstance();
 //
 
 if (!$engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)
-	|| !$engine->getConfig()->getValueAsBoolean('GUI', 'RepositoryDumpEnabled', true)) {
-	$engine->forwardError(ERROR_INVALID_MODULE);
+    || !$engine->getConfig()->getValueAsBoolean('GUI', 'RepositoryDumpEnabled', true)) {
+    $engine->forwardError(ERROR_INVALID_MODULE);
 }
 
 $engine->checkUserAuthentication(true, ACL_MOD_REPO, ACL_ACTION_DUMP);
@@ -49,15 +49,15 @@ $varRepositoryName = rawurldecode($varRepositoryNameEnc);
 //
 
 if ($varParentIdentifier == NULL || $varRepositoryName == NULL) {
-	$engine->addException(new ValidationException(tr('You have to select at least one repository.')));
+    $engine->addException(new ValidationException(tr('You have to select at least one repository.')));
 }
 else {
-	try {
-		$repositoryObject = new \svnadmin\core\entities\Repository($varRepositoryName, $varParentIdentifier);
-		$engine->getRepositoryEditProvider()->dump($repositoryObject);
-	}
-	catch (Exception $e) {
-		\svnadmin\core\Engine::getInstance()->addException($e);
-	}
+    try {
+        $repositoryObject = new \svnadmin\core\entities\Repository($varRepositoryName, $varParentIdentifier);
+        $engine->getRepositoryEditProvider()->dump($repositoryObject);
+    }
+    catch (Exception $e) {
+        \svnadmin\core\Engine::getInstance()->addException($e);
+    }
 }
 ?>

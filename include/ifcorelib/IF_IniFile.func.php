@@ -90,10 +90,10 @@ function if_parse_ini_file( $filename )
  */
 function if_write_ini_file( $dest_filename, $data )
 {
-	if( !is_array( $data ) )
-	{
-		return false;
-	}
+    if( !is_array( $data ) )
+    {
+        return false;
+    }
 
   if( !file_exists( $dest_filename ) )
   {

@@ -19,7 +19,7 @@
  */
 if (!defined("ACTION_HANDLING"))
 {
-	die("HaHa!");
+    die("HaHa!");
 }
 
 $E = \svnadmin\core\Engine::getInstance();
@@ -30,7 +30,7 @@ $E = \svnadmin\core\Engine::getInstance();
 
 if (!$E->isViewUpdateable())
 {
-	$E->forwardError(ERROR_INVALID_MODULE);
+    $E->forwardError(ERROR_INVALID_MODULE);
 }
 
 //
@@ -39,30 +39,30 @@ if (!$E->isViewUpdateable())
 //
 
 try {
-	// List of update providers.
-	$providers = array(
-		"User-View" => $E->getProvider(PROVIDER_USER_VIEW),
-		"Group-View" => $E->getProvider(PROVIDER_GROUP_VIEW),
-		"AccessPath-View" => $E->getProvider(PROVIDER_ACCESSPATH_VIEW)
-	);
+    // List of update providers.
+    $providers = array(
+        "User-View" => $E->getProvider(PROVIDER_USER_VIEW),
+        "Group-View" => $E->getProvider(PROVIDER_GROUP_VIEW),
+        "AccessPath-View" => $E->getProvider(PROVIDER_ACCESSPATH_VIEW)
+    );
 
-	foreach ($providers as $type => &$prov)
-	{
-		try {
-			if ($prov != null && $prov->isUpdateable())
-			{
-				if ($prov->update())
-					$E->addMessage(tr("Update successful: %0", array($type)));
-				else
-					throw new Exception(tr("An unknown error occured. Check your configuration, please."));
-			}
-		}
-		catch (Exception $except) {
-			$E->addException($except);
-		}
-	}
+    foreach ($providers as $type => &$prov)
+    {
+        try {
+            if ($prov != null && $prov->isUpdateable())
+            {
+                if ($prov->update())
+                    $E->addMessage(tr("Update successful: %0", array($type)));
+                else
+                    throw new Exception(tr("An unknown error occured. Check your configuration, please."));
+            }
+        }
+        catch (Exception $except) {
+            $E->addException($except);
+        }
+    }
 }
 catch (Exception $excep) {
-	$E->addException($excep);
+    $E->addException($excep);
 }
 ?>

@@ -67,7 +67,7 @@ if ($appEngine->isGroupViewActive() && $appEngine->checkUserAuthentication(false
     $len = count($users);
     for ($i=0; $i<$len; $i++)
     {
-    	if_array_remove_object_element($allusers, $users[$i], "name");
+        if_array_remove_object_element($allusers, $users[$i], "name");
     }
     $allusers = array_values($allusers);
 

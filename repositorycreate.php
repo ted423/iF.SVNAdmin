@@ -26,7 +26,7 @@ include("include/config.inc.php");
 $engine = \svnadmin\core\Engine::getInstance();
 
 if (!$engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)) {
-	$engine->forwardInvalidModule(true);
+    $engine->forwardInvalidModule(true);
 }
 
 $engine->checkUserAuthentication(true, ACL_MOD_REPO, ACL_ACTION_ADD);
@@ -38,7 +38,7 @@ $appTR->loadModule("repositorycreate");
 
 if (check_request_var('create'))
 {
-	$engine->handleAction('create_repository');
+    $engine->handleAction('create_repository');
 }
 
 //

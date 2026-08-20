@@ -7,7 +7,7 @@ include("include/config.inc.php");
 
 if (!$appEngine->isAclManagerActive())
 {
-	$appEngine->forwardInvalidModule(true);
+    $appEngine->forwardInvalidModule(true);
 }
 
 $appEngine->checkUserAuthentication(true, ACL_MOD_ROLE, ACL_ACTION_VIEW);

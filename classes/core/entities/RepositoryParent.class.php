@@ -26,40 +26,40 @@ namespace svnadmin\core\entities;
  */
 class RepositoryParent
 {
-	/**
-	 * The unique identifier for this repository-parent location.
-	 * @var string
-	 */
-	public $identifier = NULL;
+    /**
+     * The unique identifier for this repository-parent location.
+     * @var string
+     */
+    public $identifier = NULL;
 
-	/**
-	 * The path to this repository-parent location.
-	 * @var string
-	 */
-	public $path = NULL;
-	
-	/**
-	 * Description for the repository-parent location.
-	 * @var string
-	 */
-	public $description = NULL;
-	
-	
-	public function __construct($identifier = NULL, $path = NULL,
-			$description = NULL)
-	{
-		$this->identifier = $identifier;
-		$this->path = $path;
-		$this->description = $description;
-	}
-	
-	public function getEncodedIdentifier()
-	{
-		return rawurlencode($this->identifier);
-	}
-	
-	public function getEncodedPath()
-	{
-		return rawurlencode($this->path);
-	}
+    /**
+     * The path to this repository-parent location.
+     * @var string
+     */
+    public $path = NULL;
+    
+    /**
+     * Description for the repository-parent location.
+     * @var string
+     */
+    public $description = NULL;
+    
+    
+    public function __construct($identifier = NULL, $path = NULL,
+            $description = NULL)
+    {
+        $this->identifier = $identifier;
+        $this->path = $path;
+        $this->description = $description;
+    }
+    
+    public function getEncodedIdentifier()
+    {
+        return rawurlencode($this->identifier);
+    }
+    
+    public function getEncodedPath()
+    {
+        return rawurlencode($this->path);
+    }
 }

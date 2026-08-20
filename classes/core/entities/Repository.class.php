@@ -21,57 +21,57 @@ namespace svnadmin\core\entities;
 
 class Repository
 {
-	/**
-	 * The name of the repository.
-	 * @var string
-	 */
-	public $name;
-	
-	/**
-	 * The parent identifier of the repository.
-	 * (Association to an SVNParentPath)
-	 * @var string/int
-	 */
-	public $parentIdentifier;
+    /**
+     * The name of the repository.
+     * @var string
+     */
+    public $name;
+    
+    /**
+     * The parent identifier of the repository.
+     * (Association to an SVNParentPath)
+     * @var string/int
+     */
+    public $parentIdentifier;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param string $name
-	 * @param string $parentIdentifier 
-	 */
-	public function __construct($name = null, $parentIdentifier = null)
-	{
-		$this->name = $name;
-		$this->parentIdentifier = $parentIdentifier;
-	}
+    /**
+     * Constructor.
+     * 
+     * @param string $name
+     * @param string $parentIdentifier 
+     */
+    public function __construct($name = null, $parentIdentifier = null)
+    {
+        $this->name = $name;
+        $this->parentIdentifier = $parentIdentifier;
+    }
 
-	public function getName()
-	{
-		return $this->name;
-	}
-	
-	public function getParentIdentifier()
-	{
-		return $this->parentIdentifier;
-	}
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function getParentIdentifier()
+    {
+        return $this->parentIdentifier;
+    }
 
-	public function getEncodedName()
-	{
-		return rawurlencode($this->name);
-	}
-	
-	public function getEncodedParentIdentifier()
-	{
-		return rawurlencode($this->parentIdentifier);
-	}
+    public function getEncodedName()
+    {
+        return rawurlencode($this->name);
+    }
+    
+    public function getEncodedParentIdentifier()
+    {
+        return rawurlencode($this->parentIdentifier);
+    }
 
-	public static function compare( $o1, $o2 )
-	{
-		if ($o1->name == $o2->name) {
-			return 0;
-		}
-		return ($o1->name > $o2->name) ? +1 : -1;
-	}
+    public static function compare( $o1, $o2 )
+    {
+        if ($o1->name == $o2->name) {
+            return 0;
+        }
+        return ($o1->name > $o2->name) ? +1 : -1;
+    }
 }
 ?>

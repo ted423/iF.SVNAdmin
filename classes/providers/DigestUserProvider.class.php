@@ -46,10 +46,10 @@ namespace svnadmin\providers
       {
         $this->m_init_done = true;
         $this->m_userfile = new \IF_HtDigest
-							(
-								$appEngine->getConfig()->getValue("Users:digest", "SVNUserDigestFile"),
-								$appEngine->getConfig()->getValue("Users:digest", "SVNDigestRealm")
-							);
+                            (
+                                $appEngine->getConfig()->getValue("Users:digest", "SVNUserDigestFile"),
+                                $appEngine->getConfig()->getValue("Users:digest", "SVNDigestRealm")
+                            );
         return $this->m_userfile->init();
       }
       return false;

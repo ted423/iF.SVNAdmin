@@ -51,13 +51,13 @@ namespace svnadmin\providers
       return false;
     }
 
-	public function save()
+    public function save()
     {
-		if (!$this->m_userfile->writeToFile())
-		{
-			throw new Exception("Unable to save file.");
-		}
-		return true;
+        if (!$this->m_userfile->writeToFile())
+        {
+            throw new Exception("Unable to save file.");
+        }
+        return true;
     }
 
     public function isUpdateable()

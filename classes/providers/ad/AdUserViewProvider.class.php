@@ -22,7 +22,7 @@
 namespace svnadmin\providers\ad;
 
 class AdUserViewProvider
-    implements	\svnadmin\core\interfaces\IUserViewProvider,
+    implements    \svnadmin\core\interfaces\IUserViewProvider,
     \svnadmin\core\interfaces\IGroupViewProvider
 {
     /**

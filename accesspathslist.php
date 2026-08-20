@@ -25,7 +25,7 @@ include("include/config.inc.php");
 
 if (!$appEngine->isProviderActive(PROVIDER_ACCESSPATH_VIEW))
 {
-	$appEngine->forwardError(ERROR_INVALID_MODULE);
+    $appEngine->forwardError(ERROR_INVALID_MODULE);
 }
 
 $appEngine->checkUserAuthentication(true, ACL_MOD_ACCESSPATH, ACL_ACTION_VIEW);
@@ -38,11 +38,11 @@ $appTR->loadModule("accesspathslist");
 // Form 'delete' request.
 if (check_request_var("delete"))
 {
-	$appEngine->handleAction("delete_accesspath");
+    $appEngine->handleAction("delete_accesspath");
 }
 else if (check_request_var("assign_projectmanager"))
 {
-	$appEngine->handleAction("assign_projectmanager");
+    $appEngine->handleAction("assign_projectmanager");
 }
 
 //
@@ -53,39 +53,39 @@ $list = array();
 $users = array();
 
 try {
-	// All AccessPaths.
-	$list = $appEngine->getAccessPathViewProvider()->getPaths();
-	usort($list, array('\svnadmin\core\entities\AccessPath', "compare"));
+    // All AccessPaths.
+    $list = $appEngine->getAccessPathViewProvider()->getPaths();
+    usort($list, array('\svnadmin\core\entities\AccessPath', "compare"));
 
 
-	// Filter access-paths for project-managers.
-	if ($appEngine->isAuthenticationActive())
-	{
-		$currentUsername = $appEngine->getSessionUsername();
-		if ($appEngine->getAclManager()->isUserAccessPathManager($currentUsername))
-		{
-			$list = $appEngine->getAclManager()->filterAccessPathsList($currentUsername, $list);
-		}
+    // Filter access-paths for project-managers.
+    if ($appEngine->isAuthenticationActive())
+    {
+        $currentUsername = $appEngine->getSessionUsername();
+        if ($appEngine->getAclManager()->isUserAccessPathManager($currentUsername))
+        {
+            $list = $appEngine->getAclManager()->filterAccessPathsList($currentUsername, $list);
+        }
 
-		// Load list of users to create a combobox and assign them as project managers to paths.
-		if ($appEngine->isUserViewActive() && $appEngine->checkUserAuthentication(false, ACL_MOD_PROJECTMANAGER, ACL_ACTION_ASSIGN))
-		{
-			$users = $appEngine->getUserViewProvider()->getUsers(false);
-			usort($users, array('\svnadmin\core\entities\User', "compare"));
-		}
+        // Load list of users to create a combobox and assign them as project managers to paths.
+        if ($appEngine->isUserViewActive() && $appEngine->checkUserAuthentication(false, ACL_MOD_PROJECTMANAGER, ACL_ACTION_ASSIGN))
+        {
+            $users = $appEngine->getUserViewProvider()->getUsers(false);
+            usort($users, array('\svnadmin\core\entities\User', "compare"));
+        }
 
-		// Get the project managers of each path.
-		$listCount = count($list);
-		for ($i=0; $i<$listCount; $i++)
-		{
-			$managers = $appEngine->getAclManager()->getUsersOfAccessPath($list[$i]->path);
-	  		$list[$i]->managers = $managers;
-		}
-	}
+        // Get the project managers of each path.
+        $listCount = count($list);
+        for ($i=0; $i<$listCount; $i++)
+        {
+            $managers = $appEngine->getAclManager()->getUsersOfAccessPath($list[$i]->path);
+              $list[$i]->managers = $managers;
+        }
+    }
 
 }
 catch (Exception $ex) {
-	$appEngine->addException($ex);
+    $appEngine->addException($ex);
 }
 
 SetValue("UserList", $users);

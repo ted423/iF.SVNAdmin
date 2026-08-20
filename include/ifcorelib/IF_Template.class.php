@@ -34,23 +34,23 @@ class IF_Template_Exception extends Exception
  */
 class IF_Template
 {
-	// The string which is on the left of a variable.
-	private $m_leftDelimiter = '${';
-	
-	// The string which is on the right of a variable.
-	private $m_rightDelimiter = '}';
-	
-	// The IF_File class of the template file.
-	private $m_templateFile = NULL;
-	
-	// The file content of the template file.
-	private $m_templateContent = NULL;
-	
-	// Used replacements for the patterns.
-	public $m_replacements = array();
-	
-	// Defines for if-statements.
-	private $m_defines = array();
+    // The string which is on the left of a variable.
+    private $m_leftDelimiter = '${';
+    
+    // The string which is on the right of a variable.
+    private $m_rightDelimiter = '}';
+    
+    // The IF_File class of the template file.
+    private $m_templateFile = NULL;
+    
+    // The file content of the template file.
+    private $m_templateContent = NULL;
+    
+    // Used replacements for the patterns.
+    public $m_replacements = array();
+    
+    // Defines for if-statements.
+    private $m_defines = array();
 
   // Translator used for variables.
   private $m_translator = NULL;
@@ -62,61 +62,61 @@ class IF_Template
   // ACL for defines.
   // The object must provide function: hasPermission(module, action)
   private $m_acl = NULL;
-	
-	/**
-	 * Creates a new instance of this class.
-	 *
-	 */
-	public function __construct()
-	{
-	}
-	
-	/**
-	 * Loads the given template from file.
-	 *
-	 * @param IF_File $strFile
-	 * 
-	 * @return bool
-	 */
-	public function loadFromFile( $templateFile )
-	{
-		$this->m_templateFile = $templateFile;
-		
-		// Check whether the file exists.
-		if( $this->m_templateFile->exists() )
-		{
-			// Read content from file.
-			$this->m_templateContent = file_get_contents( $this->m_templateFile->getPath() );
-			
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-	
-	/**
-	 * Loads the template from the given string object.
-	 *
-	 * @param string $templateString
-	 * 
-	 * @return bool
-	 */
-	public function loadFromString( $templateString )
-	{
-		if( !empty($templateString) )
-		{
-			// Init templateContent.
-			$this->m_templateContent = $templateString;
-			
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
+    
+    /**
+     * Creates a new instance of this class.
+     *
+     */
+    public function __construct()
+    {
+    }
+    
+    /**
+     * Loads the given template from file.
+     *
+     * @param IF_File $strFile
+     * 
+     * @return bool
+     */
+    public function loadFromFile( $templateFile )
+    {
+        $this->m_templateFile = $templateFile;
+        
+        // Check whether the file exists.
+        if( $this->m_templateFile->exists() )
+        {
+            // Read content from file.
+            $this->m_templateContent = file_get_contents( $this->m_templateFile->getPath() );
+            
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    /**
+     * Loads the template from the given string object.
+     *
+     * @param string $templateString
+     * 
+     * @return bool
+     */
+    public function loadFromString( $templateString )
+    {
+        if( !empty($templateString) )
+        {
+            // Init templateContent.
+            $this->m_templateContent = $templateString;
+            
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
 
   /**
    * Sets the translator, which should be used for translation tags.
@@ -135,49 +135,49 @@ class IF_Template
   {
     $this->m_acl = $aclObject;
   }
-	
-	/**
-	 * Adds a new replacement to the template class.
-	 * All replacements will replace the pattern in the template string.
-	 * 
-	 * Example:
-	 * 1. Parameter: "NAME"
-	 * 2. Parameter: "Foo"
-	 * 
-	 * This replacement replaces the string "${NAME}" into "Foo".
-	 *
-	 * @param string $strPattern
-	 * @param string $strReplacement
-	 * 
-	 * @return bool
-	 */
-	public function addReplacement( $strPattern , $replacement )
-	{
-		if( !empty($strPattern) ) // Using != NULL, because empty strings are valid
-		{
-			$this->m_replacements[$strPattern] = $replacement;
-			return TRUE;
-		}
-		else
-		{
-			return FALSE;
-		}
-	}
-	
-	/**
-	 * Adds a new define which can be used for IF statements.
-	 *
-	 * @param string $strDefine
-	 * @return bool
-	 */
-	public function addDefine( $strDefine )
-	{
+    
+    /**
+     * Adds a new replacement to the template class.
+     * All replacements will replace the pattern in the template string.
+     * 
+     * Example:
+     * 1. Parameter: "NAME"
+     * 2. Parameter: "Foo"
+     * 
+     * This replacement replaces the string "${NAME}" into "Foo".
+     *
+     * @param string $strPattern
+     * @param string $strReplacement
+     * 
+     * @return bool
+     */
+    public function addReplacement( $strPattern , $replacement )
+    {
+        if( !empty($strPattern) ) // Using != NULL, because empty strings are valid
+        {
+            $this->m_replacements[$strPattern] = $replacement;
+            return TRUE;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    /**
+     * Adds a new define which can be used for IF statements.
+     *
+     * @param string $strDefine
+     * @return bool
+     */
+    public function addDefine( $strDefine )
+    {
     if( !empty($strDefine) )
     {
-    	if (!in_array($strDefine, $this->m_defines))
-    	{
-    		$this->m_defines[] = $strDefine;
-    	}
+        if (!in_array($strDefine, $this->m_defines))
+        {
+            $this->m_defines[] = $strDefine;
+        }
       return TRUE;
     }
     return FALSE;
@@ -325,54 +325,54 @@ class IF_Template
     }
     while(true);
   }
-	
-	/**
-	 * Replaces the added patterns with the replacements.
-	 *
-	 * @param string The text in which are variables to replace.
-	 * @param array Associative array with patterns and values.
-	 * 
-	 * @return string The new template content with replaced variables.
-	 */
-	private function doReplacements( $strText , $vars )
-	{
-		// Check whether patterns and replacements are given.
-		if( ( count($vars) > 0 ) )
-		{
-			// The keys (patterns) of the template.
-			$arrKeys = array_keys( $vars );
-			
-			for( $i = 0; $i < count( $arrKeys ); $i++ )
-			{
-				$strPattern = $arrKeys[$i];
-				$value = $vars[$strPattern];
-				
-				if( is_scalar( $value ) )
-				{
-					// Add delimiters to the search string (pattern).
-					$strPattern = $this->m_leftDelimiter . $strPattern . $this->m_rightDelimiter;
+    
+    /**
+     * Replaces the added patterns with the replacements.
+     *
+     * @param string The text in which are variables to replace.
+     * @param array Associative array with patterns and values.
+     * 
+     * @return string The new template content with replaced variables.
+     */
+    private function doReplacements( $strText , $vars )
+    {
+        // Check whether patterns and replacements are given.
+        if( ( count($vars) > 0 ) )
+        {
+            // The keys (patterns) of the template.
+            $arrKeys = array_keys( $vars );
+            
+            for( $i = 0; $i < count( $arrKeys ); $i++ )
+            {
+                $strPattern = $arrKeys[$i];
+                $value = $vars[$strPattern];
+                
+                if( is_scalar( $value ) )
+                {
+                    // Add delimiters to the search string (pattern).
+                    $strPattern = $this->m_leftDelimiter . $strPattern . $this->m_rightDelimiter;
 
-					// Replace the pattern with the value.
-					$strText = str_replace( $strPattern , $value , $strText );
-				}
-				else
-				{
-					// The current $value is an object.. we can not handle objects.
-					continue;
-				}
-			}
-			
-			return $strText;
-		}
-		else
-		{
-			return $strText;
-		}
-	}
-	
-	/**
-	 * Searches for IFDEF statements and handles them.
-	 * The function also supports the ACL_* defines, which are resolved
+                    // Replace the pattern with the value.
+                    $strText = str_replace( $strPattern , $value , $strText );
+                }
+                else
+                {
+                    // The current $value is an object.. we can not handle objects.
+                    continue;
+                }
+            }
+            
+            return $strText;
+        }
+        else
+        {
+            return $strText;
+        }
+    }
+    
+    /**
+     * Searches for IFDEF statements and handles them.
+     * The function also supports the ACL_* defines, which are resolved
    * with the $m_acl object.
    *
    * An ACL variable looks like: ACL_Module_Action.
@@ -381,9 +381,9 @@ class IF_Template
    * @param int $iOffset The start search position.
    * @param bool $skip If this value is TRUE, then the conditions must not be
    *                   resolved. Only remove the content.
-	 */
-	private function doDefines(&$text, $iOffset=0, $skip=FALSE)
-	{
+     */
+    private function doDefines(&$text, $iOffset=0, $skip=FALSE)
+    {
     do
     {
       // Search for the head position of the next IFDEF statement.
@@ -449,276 +449,276 @@ class IF_Template
     }
     while( $iPosHead );
   }
-	
-	/**
-	 * Searches for all loops in the template content
-	 * and replaces all including variables of the loops.
-	 */
-	private function doLoops()
-	{	
-		// Find out the position of the first loop-start.
-		$iOffset = 0;
-		
-		do
-		{
-			// Will contain the final loop content.
-			$finalLoopContent = "";
-			
-			// Find out the position of the next loop statement start.
-			// If there are no more loop heads then $iPosHead == FALSE.
-			$iPosHead = strpos( $this->m_templateContent , "[{LOOP " , $iOffset );
-			
-			if( $iPosHead )
-			{
-				// Get the position of the loop foot.
-				$iPosFoot = strpos( $this->m_templateContent , "[{/LOOP}]" , $iPosHead );
-				
-				if( $iPosFoot )
-				{
-					// Read the complete loop content into a new string.
-					$strLoopContent = substr(
-							$this->m_templateContent , $iPosHead , $iPosFoot-$iPosHead
-						);
-					
-					// Get the variable which is to loop from loop-head.
-					$strLoopHeadPattern = "/\[\{LOOP ([a-zA-Z0-9\_]+)\}\]/";
-					
-					// Find variable or break, because of syntax error.
-					if( preg_match( $strLoopHeadPattern , $strLoopContent , $matches ) == 1 )
-					{
-						// The name of the variable which is to iterate.
-						$strVariableName = $matches[1];
-						
-						// Calculate the string length of the loop head.
-						// 9 = all static signs of the loop head.
-						// n = length of the variable name
-						$iLoopHeadLength = 9 + strlen( $strVariableName );
-						
-						// Remove the loop head from content.
-						$strLoopContent = substr(
-								$this->m_templateContent , $iPosHead+$iLoopHeadLength ,
-								($iPosFoot-$iPosHead)-$iLoopHeadLength
-							);
-						
-						// Check whether the variable exists in the replacements array.
-						$var = NULL;
-						
-						foreach( $this->m_replacements as $k=>$v )
-						{
-							if( $k == $strVariableName )
-							{
-								$var = $v;
-								break;
-							}
-							else
-							{
-								continue;
-							}
-						}
-						
-						if( $var != NULL )
-						{
-							// Go on.
-							if( is_array( $var ) )
-							{
-								// Variable contains an array.
-								// Iterate the array.
-								for( $i = 0; $i < count($var); $i++ )
-								{
-									// The current iteration element.
-									$element = $var[$i];
-									
-									// Handle different types of element.
-									if( is_object( $element ) )
-									{
-										$strLoopIterationPart = $strLoopContent;
-										
-										// Create Reflection object to current element.
-										$oReflectionObject = new ReflectionObject( $element );
-										
-										// Find all object calls.
-										if( preg_match_all( "/\\$\{\b$strVariableName\b\}\{([A-Za-z0-9_]+)\}/" , 
-												$strLoopContent , $matches , PREG_SET_ORDER ) != FALSE )
-										{
-											// Iterate the object calls.
-											foreach( $matches as $match )
-											{
-												$property = $match[1];
-												
-												try
-												{
-													// Find the "get*" method of the $property.
-													$oMethod=$oReflectionObject->getMethod("get".ucfirst($property));
-													$retVal=$oMethod->invoke($element);
-												}
-												catch(Exception $e)
-												{
-													try
-													{
-														// Find the property named by $property.
-														$oProperty=$oReflectionObject->getProperty($property);
-														$retVal=$oProperty->getValue($element);
-													}
-													catch(Exception $e2)
-													{
-														throw $e2;
-													}
-												}
-												
-												// Build the pattern which is to replace with the retval.
-												$strPattern = "\${".$strVariableName."}{".$property."}";
-												
-												// Replace.
-												$strLoopIterationPart = str_replace( $strPattern , $retVal , $strLoopIterationPart );
-											}
-											
-											$finalLoopContent = $finalLoopContent . $strLoopIterationPart;
-											
-										}
-										else
-										{
-											throw new Exception( "Template error: There are no object calls." );
-										}
-									}
-									//
-									// DATATYPE: Scalar
-									//
+    
+    /**
+     * Searches for all loops in the template content
+     * and replaces all including variables of the loops.
+     */
+    private function doLoops()
+    {    
+        // Find out the position of the first loop-start.
+        $iOffset = 0;
+        
+        do
+        {
+            // Will contain the final loop content.
+            $finalLoopContent = "";
+            
+            // Find out the position of the next loop statement start.
+            // If there are no more loop heads then $iPosHead == FALSE.
+            $iPosHead = strpos( $this->m_templateContent , "[{LOOP " , $iOffset );
+            
+            if( $iPosHead )
+            {
+                // Get the position of the loop foot.
+                $iPosFoot = strpos( $this->m_templateContent , "[{/LOOP}]" , $iPosHead );
+                
+                if( $iPosFoot )
+                {
+                    // Read the complete loop content into a new string.
+                    $strLoopContent = substr(
+                            $this->m_templateContent , $iPosHead , $iPosFoot-$iPosHead
+                        );
+                    
+                    // Get the variable which is to loop from loop-head.
+                    $strLoopHeadPattern = "/\[\{LOOP ([a-zA-Z0-9\_]+)\}\]/";
+                    
+                    // Find variable or break, because of syntax error.
+                    if( preg_match( $strLoopHeadPattern , $strLoopContent , $matches ) == 1 )
+                    {
+                        // The name of the variable which is to iterate.
+                        $strVariableName = $matches[1];
+                        
+                        // Calculate the string length of the loop head.
+                        // 9 = all static signs of the loop head.
+                        // n = length of the variable name
+                        $iLoopHeadLength = 9 + strlen( $strVariableName );
+                        
+                        // Remove the loop head from content.
+                        $strLoopContent = substr(
+                                $this->m_templateContent , $iPosHead+$iLoopHeadLength ,
+                                ($iPosFoot-$iPosHead)-$iLoopHeadLength
+                            );
+                        
+                        // Check whether the variable exists in the replacements array.
+                        $var = NULL;
+                        
+                        foreach( $this->m_replacements as $k=>$v )
+                        {
+                            if( $k == $strVariableName )
+                            {
+                                $var = $v;
+                                break;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        
+                        if( $var != NULL )
+                        {
+                            // Go on.
+                            if( is_array( $var ) )
+                            {
+                                // Variable contains an array.
+                                // Iterate the array.
+                                for( $i = 0; $i < count($var); $i++ )
+                                {
+                                    // The current iteration element.
+                                    $element = $var[$i];
+                                    
+                                    // Handle different types of element.
+                                    if( is_object( $element ) )
+                                    {
+                                        $strLoopIterationPart = $strLoopContent;
+                                        
+                                        // Create Reflection object to current element.
+                                        $oReflectionObject = new ReflectionObject( $element );
+                                        
+                                        // Find all object calls.
+                                        if( preg_match_all( "/\\$\{\b$strVariableName\b\}\{([A-Za-z0-9_]+)\}/" , 
+                                                $strLoopContent , $matches , PREG_SET_ORDER ) != FALSE )
+                                        {
+                                            // Iterate the object calls.
+                                            foreach( $matches as $match )
+                                            {
+                                                $property = $match[1];
+                                                
+                                                try
+                                                {
+                                                    // Find the "get*" method of the $property.
+                                                    $oMethod=$oReflectionObject->getMethod("get".ucfirst($property));
+                                                    $retVal=$oMethod->invoke($element);
+                                                }
+                                                catch(Exception $e)
+                                                {
+                                                    try
+                                                    {
+                                                        // Find the property named by $property.
+                                                        $oProperty=$oReflectionObject->getProperty($property);
+                                                        $retVal=$oProperty->getValue($element);
+                                                    }
+                                                    catch(Exception $e2)
+                                                    {
+                                                        throw $e2;
+                                                    }
+                                                }
+                                                
+                                                // Build the pattern which is to replace with the retval.
+                                                $strPattern = "\${".$strVariableName."}{".$property."}";
+                                                
+                                                // Replace.
+                                                $strLoopIterationPart = str_replace( $strPattern , $retVal , $strLoopIterationPart );
+                                            }
+                                            
+                                            $finalLoopContent = $finalLoopContent . $strLoopIterationPart;
+                                            
+                                        }
+                                        else
+                                        {
+                                            throw new Exception( "Template error: There are no object calls." );
+                                        }
+                                    }
+                                    //
+                                    // DATATYPE: Scalar
+                                    //
                   elseif( is_string( $element ) || is_int( $element ) || is_float( $element ) )
                   {
-										$strLoopIterationPart = $strLoopContent;
-										
-										// Find all object calls.
-										if( preg_match_all( "/\\$\{\b$strVariableName\b\}\{\\$\}/" , 
-												$strLoopContent , $matches , PREG_SET_ORDER ) != FALSE )
-										{
-											// Iterate the object calls.
-											foreach( $matches as $match )
-											{
-												// Build the pattern which is to replace with the retval.
-												$strPattern = "\${".$strVariableName."}{\$}";
-												
-												// Replace.
-												$strLoopIterationPart = str_replace( $strPattern , $element , $strLoopIterationPart );
-											}
-											
-											$finalLoopContent = $finalLoopContent . $strLoopIterationPart;
-											
-										}
-										else
-										{
-											throw new Exception( "Template error: There are no direct accessable value calls." );
-										}
+                                        $strLoopIterationPart = $strLoopContent;
+                                        
+                                        // Find all object calls.
+                                        if( preg_match_all( "/\\$\{\b$strVariableName\b\}\{\\$\}/" , 
+                                                $strLoopContent , $matches , PREG_SET_ORDER ) != FALSE )
+                                        {
+                                            // Iterate the object calls.
+                                            foreach( $matches as $match )
+                                            {
+                                                // Build the pattern which is to replace with the retval.
+                                                $strPattern = "\${".$strVariableName."}{\$}";
+                                                
+                                                // Replace.
+                                                $strLoopIterationPart = str_replace( $strPattern , $element , $strLoopIterationPart );
+                                            }
+                                            
+                                            $finalLoopContent = $finalLoopContent . $strLoopIterationPart;
+                                            
+                                        }
+                                        else
+                                        {
+                                            throw new Exception( "Template error: There are no direct accessable value calls." );
+                                        }
                   }
-								}
-							}
-							else
-							{
-								throw new Exception( "Template error: Loop variable must be from type array." );
-							}
-						}
-						else
-						{
-							// The required variable which is to iterate in a loop
-							// doesn't exist in the replacements array.
-							//throw new Exception( "Template error: Missing variable '$strVariableName'" );
-							
-							// Remove the loop from template.
-							$finalLoopContent = "";
-						}
-					}
-					else
-					{
-						throw new Exception( "Templates syntax error: Wrong variable name." );	
-					}
-					
-					// Replace the templateContent's loop with the replaced one.
-					$strLoopContent = substr(
-							$this->m_templateContent , $iPosHead , ($iPosFoot+9)-$iPosHead
-						);
-						
-					$this->m_templateContent = str_replace( $strLoopContent , $finalLoopContent , $this->m_templateContent );
-					
-					// Set the next start of loop search to the end of the loop-foot.
-					$iOffset = $iPosHead;
-				}
-				else
-				{
-					// The foot of the loop missed.
-					// Syntax error.
-					throw new Exception( "Template syntax error: Missing foot of loop." );
-				}
-			}
-		}
-		while( $iPosHead );
-	}
-	
-	/**
-	 * Searches all include statements and reads the contents from the include
-	 * files into the current template.
-	 *
-	 */
-	private function doIncludes()
-	{
-		// The regexpression for the include-tags.
-		$strRegex = "/\[\{INCLUDE ([^ \}]+)\}\]/";
-		
-		// Match the regex.
-		if( preg_match_all( $strRegex , $this->m_templateContent , $matches , PREG_SET_ORDER ) )
-		{
-			// Iterate the matches, if there are any..
-			foreach( $matches as $match )
-			{
-				//print( "Match: " . $match[0] . "<br />" );
-				//print( "Match-Group: " . $match[1] . "<br />" );
-				
-				// Check whether the include-file exists.
-				$oIncFile = new IF_File( $match[1] );
-				
-				if( $oIncFile->exists() )
-				{
-					// Read the contents of the file.
-					$fileContent = file_get_contents( $oIncFile->getPath() );
-					
-					// Insert the content into the current template file.
-					$this->m_templateContent = str_replace( $match[0] , $fileContent , $this->m_templateContent );
-				}
-				else
-				{
-					// The file which is to include can not be found.
-					throw new Exception( "Template error: The file \"" . $match[1] . "\" doesn't exist." );
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Enter description here...
-	 *
-	 */
-	public function processTemplate( $bLoops = TRUE , $bReplacements = TRUE , $bIncludes = TRUE )
-	{
-		// Print out the finished template string.
-		print(self::getProcessedTemplate($bLoops, $bReplacements, $bIncludes));
-	}
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception( "Template error: Loop variable must be from type array." );
+                            }
+                        }
+                        else
+                        {
+                            // The required variable which is to iterate in a loop
+                            // doesn't exist in the replacements array.
+                            //throw new Exception( "Template error: Missing variable '$strVariableName'" );
+                            
+                            // Remove the loop from template.
+                            $finalLoopContent = "";
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception( "Templates syntax error: Wrong variable name." );    
+                    }
+                    
+                    // Replace the templateContent's loop with the replaced one.
+                    $strLoopContent = substr(
+                            $this->m_templateContent , $iPosHead , ($iPosFoot+9)-$iPosHead
+                        );
+                        
+                    $this->m_templateContent = str_replace( $strLoopContent , $finalLoopContent , $this->m_templateContent );
+                    
+                    // Set the next start of loop search to the end of the loop-foot.
+                    $iOffset = $iPosHead;
+                }
+                else
+                {
+                    // The foot of the loop missed.
+                    // Syntax error.
+                    throw new Exception( "Template syntax error: Missing foot of loop." );
+                }
+            }
+        }
+        while( $iPosHead );
+    }
+    
+    /**
+     * Searches all include statements and reads the contents from the include
+     * files into the current template.
+     *
+     */
+    private function doIncludes()
+    {
+        // The regexpression for the include-tags.
+        $strRegex = "/\[\{INCLUDE ([^ \}]+)\}\]/";
+        
+        // Match the regex.
+        if( preg_match_all( $strRegex , $this->m_templateContent , $matches , PREG_SET_ORDER ) )
+        {
+            // Iterate the matches, if there are any..
+            foreach( $matches as $match )
+            {
+                //print( "Match: " . $match[0] . "<br />" );
+                //print( "Match-Group: " . $match[1] . "<br />" );
+                
+                // Check whether the include-file exists.
+                $oIncFile = new IF_File( $match[1] );
+                
+                if( $oIncFile->exists() )
+                {
+                    // Read the contents of the file.
+                    $fileContent = file_get_contents( $oIncFile->getPath() );
+                    
+                    // Insert the content into the current template file.
+                    $this->m_templateContent = str_replace( $match[0] , $fileContent , $this->m_templateContent );
+                }
+                else
+                {
+                    // The file which is to include can not be found.
+                    throw new Exception( "Template error: The file \"" . $match[1] . "\" doesn't exist." );
+                }
+            }
+        }
+    }
+    
+    /**
+     * Enter description here...
+     *
+     */
+    public function processTemplate( $bLoops = TRUE , $bReplacements = TRUE , $bIncludes = TRUE )
+    {
+        // Print out the finished template string.
+        print(self::getProcessedTemplate($bLoops, $bReplacements, $bIncludes));
+    }
 
   public function getProcessedTemplate($bLoops=true, $bReplacements=true, $bIncludes=true)
   {
-		// Find includes.
-		self::doIncludes();
+        // Find includes.
+        self::doIncludes();
 
-		// Find IFDEF tags.
-		self::doDefines($this->m_templateContent);
+        // Find IFDEF tags.
+        self::doDefines($this->m_templateContent);
 
-		// Find loops.
-		self::doLoops();
+        // Find loops.
+        self::doLoops();
 
     // Replace translations.
     self::doTranslations($this->m_templateContent);
 
-		// Replace variables.
-		$this->m_templateContent = self::doReplacements( $this->m_templateContent , $this->m_replacements );
+        // Replace variables.
+        $this->m_templateContent = self::doReplacements( $this->m_templateContent , $this->m_replacements );
     return $this->m_templateContent;
   }
-	
+    
 }
 ?>

@@ -13,35 +13,35 @@
  */
 function if_json_last_error_message($code = null)
 {
-	$code = $code === null ? json_last_error() : $code;
-	
-	$json_error_message = "";
-	switch ($code) {
-		case JSON_ERROR_NONE:
-			$json_error_message = "No error has occurred.";
-			break;
+    $code = $code === null ? json_last_error() : $code;
+    
+    $json_error_message = "";
+    switch ($code) {
+        case JSON_ERROR_NONE:
+            $json_error_message = "No error has occurred.";
+            break;
 
-		case JSON_ERROR_DEPTH:
-			$json_error_message = "The maximum stack depth has been exceeded.";
-			break;
+        case JSON_ERROR_DEPTH:
+            $json_error_message = "The maximum stack depth has been exceeded.";
+            break;
 
-		case JSON_ERROR_STATE_MISMATCH:
-			$json_error_message = "Occurs with underflow or with the modes mismatch.";
-			break;
+        case JSON_ERROR_STATE_MISMATCH:
+            $json_error_message = "Occurs with underflow or with the modes mismatch.";
+            break;
 
-		case JSON_ERROR_CTRL_CHAR:
-			$json_error_message = "Control character error, possibly incorrectly encoded.";
-			break;
+        case JSON_ERROR_CTRL_CHAR:
+            $json_error_message = "Control character error, possibly incorrectly encoded.";
+            break;
 
-		case JSON_ERROR_SYNTAX:
-			$json_error_message = "Syntax error.";
-			break;
+        case JSON_ERROR_SYNTAX:
+            $json_error_message = "Syntax error.";
+            break;
 
-		case JSON_ERROR_UTF8:
-			$json_error_message = "Malformed UTF-8 characters, possibly incorrectly encoded.";
-			break;
-	}
-	return $json_error_message;
+        case JSON_ERROR_UTF8:
+            $json_error_message = "Malformed UTF-8 characters, possibly incorrectly encoded.";
+            break;
+    }
+    return $json_error_message;
 }
 
 /**
@@ -63,16 +63,16 @@ function if_json_last_error_message($code = null)
  */
 function if_ensure_utf8_encoding($data)
 {
-	if (function_exists("mb_detect_encoding"))
-	{
-		if (mb_detect_encoding($data) == "UTF-8") {
-			return $data;
-		}
-		else {
-			return utf8_encode($data);
-		}
-	}
-	return $data;
+    if (function_exists("mb_detect_encoding"))
+    {
+        if (mb_detect_encoding($data) == "UTF-8") {
+            return $data;
+        }
+        else {
+            return utf8_encode($data);
+        }
+    }
+    return $data;
 }
 
 /**
@@ -84,18 +84,18 @@ function if_ensure_utf8_encoding($data)
  */
 function if_ensure_utf8_decoding($data)
 {
-	if (function_exists("mb_detect_encoding"))
-	{
-		if (mb_detect_encoding($data) == "UTF-8")
-		{
-			return utf8_decode($data);
-		}
-		else
-		{
-			return $data;
-		}
-	}
-	return $data;
+    if (function_exists("mb_detect_encoding"))
+    {
+        if (mb_detect_encoding($data) == "UTF-8")
+        {
+            return utf8_decode($data);
+        }
+        else
+        {
+            return $data;
+        }
+    }
+    return $data;
 }
 
 /**
@@ -106,20 +106,20 @@ function if_ensure_utf8_decoding($data)
  */
 function if_array_remove_empty_values(&$arr)
 {
-	$removeCount = 0;
-	$arrCount = count($arr);
-	for ($i=0; $i<$arrCount; $i++)
-	{
-		if (empty($arr[$i]))
-		{
-			unset($arr[$i]);
-			$removeCount++;
-		}
-	}
+    $removeCount = 0;
+    $arrCount = count($arr);
+    for ($i=0; $i<$arrCount; $i++)
+    {
+        if (empty($arr[$i]))
+        {
+            unset($arr[$i]);
+            $removeCount++;
+        }
+    }
 
-	if ($removeCount > 0)
-		$arr = array_values($arr);
-	return $arr;
+    if ($removeCount > 0)
+        $arr = array_values($arr);
+    return $arr;
 }
 
 /**
@@ -129,46 +129,46 @@ function if_array_remove_empty_values(&$arr)
  */
 function check_request_var($varname, &$method = NULL)
 {
-	if (isset($_POST[$varname])) {
-		$method = 'post';
-		return true;
-	}
-	else if (isset($_GET[$varname])) {
-		$method = 'get';
-		return true;
-	}
-	return false;
+    if (isset($_POST[$varname])) {
+        $method = 'post';
+        return true;
+    }
+    else if (isset($_GET[$varname])) {
+        $method = 'get';
+        return true;
+    }
+    return false;
 }
 
 function get_request_var( $varname, $defaultValue = NULL )
 {
-	$method = null;
-	if (check_request_var($varname, $method))
-	{
-		switch($method)
-		{
-			case 'get':
-				if (is_array($_GET[$varname]))
-				{
-					if (count($_GET[$varname]) == 1 && empty($_GET[$varname][0]))
-					{
-						return $defaultValue;
-					}
-				}
-				return $_GET[$varname];
+    $method = null;
+    if (check_request_var($varname, $method))
+    {
+        switch($method)
+        {
+            case 'get':
+                if (is_array($_GET[$varname]))
+                {
+                    if (count($_GET[$varname]) == 1 && empty($_GET[$varname][0]))
+                    {
+                        return $defaultValue;
+                    }
+                }
+                return $_GET[$varname];
 
-			case 'post':
-				if (is_array($_POST[$varname]))
-				{
-					if (count($_POST[$varname]) == 1 && empty($_POST[$varname][0]))
-					{
-						return $defaultValue;
-					}
-				}
-				return $_POST[$varname];
-		}
-	}
-	return $defaultValue;
+            case 'post':
+                if (is_array($_POST[$varname]))
+                {
+                    if (count($_POST[$varname]) == 1 && empty($_POST[$varname][0]))
+                    {
+                        return $defaultValue;
+                    }
+                }
+                return $_POST[$varname];
+        }
+    }
+    return $defaultValue;
 }
 
 function remove_item_by_value( &$arr, $value, $preserve = false )

@@ -98,7 +98,7 @@ $(document).ready(function(){
         <tr>
           <td colspan="2">
 
-	<?php HtmlFilterBox("accesspathlist", 1); ?>
+    <?php HtmlFilterBox("accesspathlist", 1); ?>
 
     <table id="accesspathlist" class="datatable">
       <thead>
@@ -113,7 +113,7 @@ $(document).ready(function(){
           <td><input type="checkbox" name="selected_accesspaths[]" value="<?php print($p->getPath()); ?>"></td>
           <td><a href="accesspathview.php?accesspath=<?php print($p->getEncodedPath()); ?>"><?php print($p->getPath()); ?></a></td>
         </tr>
-		<?php endforeach; ?>
+        <?php endforeach; ?>
       </tbody>
     </table>
 

@@ -18,7 +18,7 @@
  * along with this program.
  */
 if (!defined('ACTION_HANDLING')) {
-	die("HaHa!");
+    die("HaHa!");
 }
 
 $engine = \svnadmin\core\Engine::getInstance();
@@ -28,12 +28,12 @@ $engine = \svnadmin\core\Engine::getInstance();
 //
 
 if (!$engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)) {
-	$engine->forwardError(ERROR_INVALID_MODULE);
+    $engine->forwardError(ERROR_INVALID_MODULE);
 }
 
 $engine->checkUserAuthentication(true);
 if (!$engine->isCurrentUserAdmin()) {
-	$engine->forwardError(ERROR_NO_ACCESS);
+    $engine->forwardError(ERROR_NO_ACCESS);
 }
 
 //
@@ -53,17 +53,17 @@ $varRepo = rawurldecode($varRepoEnc);
 //
 
 if ($hookName == NULL) {
-	$engine->addException(new ValidationException(tr("You have to fill out all fields.")));
+    $engine->addException(new ValidationException(tr("You have to fill out all fields.")));
 }
 else {
-	$oR = new \svnadmin\core\entities\Repository($varRepo, $varParentIdentifier);
+    $oR = new \svnadmin\core\entities\Repository($varRepo, $varParentIdentifier);
 
-	try {
-		$engine->getRepositoryEditProvider()->saveHook($oR, $hookName, $hookContent);
-		$engine->addMessage(tr("The hook %0 has been saved successfully.", array($hookName)));
-	}
-	catch (Exception $ex) {
-		$engine->addException($ex);
-	}
+    try {
+        $engine->getRepositoryEditProvider()->saveHook($oR, $hookName, $hookContent);
+        $engine->addMessage(tr("The hook %0 has been saved successfully.", array($hookName)));
+    }
+    catch (Exception $ex) {
+        $engine->addException($ex);
+    }
 }
 ?>

@@ -25,7 +25,7 @@ if (!defined('ACTION_HANDLING')) { die("HaHa!"); }
 
 if (!$appEngine->isAccessPathEditActive())
 {
-	$appEngine->forwardInvalidModule(true);
+    $appEngine->forwardInvalidModule(true);
 }
 
 $appEngine->checkUserAuthentication(true, ACL_MOD_ACCESSPATH, ACL_ACTION_DELETE);
@@ -42,59 +42,59 @@ $selected = get_request_var('selected_accesspaths', array());
 
 if (count($selected) <= 0)
 {
-	$appEngine->addException(new ValidationException(tr("You have to select at least one access-path.")));
+    $appEngine->addException(new ValidationException(tr("You have to select at least one access-path.")));
 }
 else
 {
-	for ($i = 0; $i < count($selected); $i++)
-	{
-		$ap = new \svnadmin\core\entities\AccessPath();
-		$ap->path = $selected[$i];
+    for ($i = 0; $i < count($selected); $i++)
+    {
+        $ap = new \svnadmin\core\entities\AccessPath();
+        $ap->path = $selected[$i];
 
-		// Is the user restricted to some paths? (project-manager)
-		if ($appEngine->isAuthenticationActive())
-		{
-			$currentUsername = $appEngine->getSessionUsername();
-			if ($appEngine->getAclManager()->isUserAccessPathManager($currentUsername))
-			{
-				if (!$appEngine->getAclManager()->isUserAdminOfPath($currentUsername, $ap->getPath()))
-				{
-					$appEngine->addException(new Exception(tr('No permission to handle Access-Path: %0', array($ap->getPath()))));
-					continue;
-				}
-			}
-		}
+        // Is the user restricted to some paths? (project-manager)
+        if ($appEngine->isAuthenticationActive())
+        {
+            $currentUsername = $appEngine->getSessionUsername();
+            if ($appEngine->getAclManager()->isUserAccessPathManager($currentUsername))
+            {
+                if (!$appEngine->getAclManager()->isUserAdminOfPath($currentUsername, $ap->getPath()))
+                {
+                    $appEngine->addException(new Exception(tr('No permission to handle Access-Path: %0', array($ap->getPath()))));
+                    continue;
+                }
+            }
+        }
 
-		// Remove all project-manager assignments to the access-path.
-		if ($appEngine->isAclManagerActive())
-		{
-			$appEngine->getAclManager()->removeAssignmentsToPath($ap->getPath());
-		}
+        // Remove all project-manager assignments to the access-path.
+        if ($appEngine->isAclManagerActive())
+        {
+            $appEngine->getAclManager()->removeAssignmentsToPath($ap->getPath());
+        }
 
-		// Remove the access-path.
+        // Remove the access-path.
 
-		if (!$appEngine->getAccessPathEditProvider()->deleteAccessPath($ap))
-		{
-			$appEngine->addException(new Exception(tr('Can not delete Access-Path: %0', array($ap->getPath()))));
-		}
-		$appEngine->addMessage(tr('Removed Access-Path: %0', array($ap->getPath())));
-	}
+        if (!$appEngine->getAccessPathEditProvider()->deleteAccessPath($ap))
+        {
+            $appEngine->addException(new Exception(tr('Can not delete Access-Path: %0', array($ap->getPath()))));
+        }
+        $appEngine->addMessage(tr('Removed Access-Path: %0', array($ap->getPath())));
+    }
 
-	// Save changes.
+    // Save changes.
 
-	$b = $appEngine->getAccessPathEditProvider()->save();
-	if (!$b)
-	{
-		$appEngine->addException(new Exception('Can not save changes to Access-Path-Edit-Provider'));
-	}
+    $b = $appEngine->getAccessPathEditProvider()->save();
+    if (!$b)
+    {
+        $appEngine->addException(new Exception('Can not save changes to Access-Path-Edit-Provider'));
+    }
 
-	if ($appEngine->isAclManagerActive())
-	{
-		$b = $appEngine->getAclManager()->save();
-		if (!$b)
-		{
-			$appEngine->addException(new Exception('Can not save changes to Acl-Manager'));
-		}
-	}
+    if ($appEngine->isAclManagerActive())
+    {
+        $b = $appEngine->getAclManager()->save();
+        if (!$b)
+        {
+            $appEngine->addException(new Exception('Can not save changes to Acl-Manager'));
+        }
+    }
 }
 ?>

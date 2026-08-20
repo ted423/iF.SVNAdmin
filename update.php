@@ -24,9 +24,9 @@ require_once("include/config.inc.php");
 //
 
 if (!$appEngine->isViewUpdateable()
-	|| !$appEngine->getConfig()->getValueAsBoolean('GUI', 'AllowUpdateByGui', true))
+    || !$appEngine->getConfig()->getValueAsBoolean('GUI', 'AllowUpdateByGui', true))
 {
-	$appEngine->forwardError(ERROR_INVALID_MODULE);
+    $appEngine->forwardError(ERROR_INVALID_MODULE);
 }
 
 $appEngine->checkUserAuthentication(true, ACL_MOD_UPDATE, ACL_ACTION_SYNCHRONIZE);
@@ -38,7 +38,7 @@ $appTR->loadModule("update");
 
 if (check_request_var("update"))
 {
-	$appEngine->handleAction("update");
+    $appEngine->handleAction("update");
 }
 
 //

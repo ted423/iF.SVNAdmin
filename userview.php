@@ -109,14 +109,14 @@ if ($appEngine->isGroupViewActive() && $appEngine->checkUserAuthentication(false
   // Get all existing groups and remove the groups in which the user is already in.
   if ($appEngine->isGroupViewActive() && $appEngine->checkUserAuthentication(false, ACL_MOD_GROUP, ACL_ACTION_ASSIGN))
   {
-  	$allgroups = $appEngine->getGroupViewProvider()->getGroups();
-  	usort($allgroups, array('\svnadmin\core\entities\Group',"compare"));
-  	$len = count($groups);
-  	for ($i=0; $i<$len; $i++)
-  	{
-  		if_array_remove_object_element($allgroups, $groups[$i], "name");
-  	}
-  	$allgroups = array_values($allgroups);
+      $allgroups = $appEngine->getGroupViewProvider()->getGroups();
+      usort($allgroups, array('\svnadmin\core\entities\Group',"compare"));
+      $len = count($groups);
+      for ($i=0; $i<$len; $i++)
+      {
+          if_array_remove_object_element($allgroups, $groups[$i], "name");
+      }
+      $allgroups = array_values($allgroups);
   }
 }
 

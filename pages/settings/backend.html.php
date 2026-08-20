@@ -275,12 +275,12 @@ $(document).ready(function(){
         <span id="SVNUserDigestFileTestResult" style="display:none;"></span>
       </td>
     </tr>
-	<tr>
-		<td><?php Translate("Digest realm"); ?><br><small><b><?php Translate("Example"); ?>:</b> <?php PrintStringValue("SVNDigestRealmEx"); ?></small></td>
-		<td>
-			<input type="text" name="SVNDigestRealm" id="SVNDigestRealm" value="<?php PrintStringValue("SVNDigestRealm"); ?>">
-		</td>
-	</tr>
+    <tr>
+        <td><?php Translate("Digest realm"); ?><br><small><b><?php Translate("Example"); ?>:</b> <?php PrintStringValue("SVNDigestRealmEx"); ?></small></td>
+        <td>
+            <input type="text" name="SVNDigestRealm" id="SVNDigestRealm" value="<?php PrintStringValue("SVNDigestRealm"); ?>">
+        </td>
+    </tr>
   </tbody>
 </table>
 <br>

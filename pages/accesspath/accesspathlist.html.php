@@ -17,16 +17,16 @@ $(document).ready(function(){
 <table id="accesspathlist" class="datatable">
 <thead>
 <tr>
-	<th width="20"><?php if (IsProviderActive(PROVIDER_ACCESSPATH_EDIT) && HasAccess(ACL_MOD_ACCESSPATH, ACL_ACTION_DELETE)) : ?><input type="checkbox" id="selectall"><?php endif; ?></th>
-	<th><?php Translate("Access-Path"); ?></th>
+    <th width="20"><?php if (IsProviderActive(PROVIDER_ACCESSPATH_EDIT) && HasAccess(ACL_MOD_ACCESSPATH, ACL_ACTION_DELETE)) : ?><input type="checkbox" id="selectall"><?php endif; ?></th>
+    <th><?php Translate("Access-Path"); ?></th>
 </tr>
 </thead>
 
 <tfoot>
-	<tr>
-		<td colspan="2">
+    <tr>
+        <td colspan="2">
 
-			<table class="datatableinline">
+            <table class="datatableinline">
             <colgroup>
               <col width="50%">
               <col width="50%">

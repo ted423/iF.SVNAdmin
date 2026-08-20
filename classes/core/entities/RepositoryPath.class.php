@@ -21,74 +21,74 @@ namespace svnadmin\core\entities;
 
 class RepositoryPath
 {
-	public $parent;
-	public $name;
-	public $type;
-	public $author;
-	public $revision;
-	public $date;
-	public $apacheWebLink;
-	public $customWebLink;
+    public $parent;
+    public $name;
+    public $type;
+    public $author;
+    public $revision;
+    public $date;
+    public $apacheWebLink;
+    public $customWebLink;
 
-	public function __construct(
-		$parent=null, $name=null, $type=null, $author=null,
-		$revision=null, $date=null)
-	{
-		$this->parent = $parent;
-		$this->name = $name;
-		$this->type = $type;
-		$this->author = $author;
-		$this->revision = $revision;
-		$this->date = $date;
-		$this->apacheWebLink = null;
-		$this->customWebLink = null;
-	}
+    public function __construct(
+        $parent=null, $name=null, $type=null, $author=null,
+        $revision=null, $date=null)
+    {
+        $this->parent = $parent;
+        $this->name = $name;
+        $this->type = $type;
+        $this->author = $author;
+        $this->revision = $revision;
+        $this->date = $date;
+        $this->apacheWebLink = null;
+        $this->customWebLink = null;
+    }
 
-	public function getParent()
-	{
-		return $this->parent;
-	}
+    public function getParent()
+    {
+        return $this->parent;
+    }
 
-	public function getName()
-	{
-		return $this->name;
-	}
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	public function getType()
-	{
-		return $this->type;
-	}
+    public function getType()
+    {
+        return $this->type;
+    }
 
-	public function getAuthor()
-	{
-		return $this->author;
-	}
+    public function getAuthor()
+    {
+        return $this->author;
+    }
 
-	public function getRevision()
-	{
-		return $this->revision;
-	}
+    public function getRevision()
+    {
+        return $this->revision;
+    }
 
-	public function getDate()
-	{
-		return $this->date;
-	}
+    public function getDate()
+    {
+        return $this->date;
+    }
 
-	public function getRelativePath()
-	{
-		if (empty($this->parent) || $this->parent == "/")
-			return $this->name;
-		else
-			return $this->parent . "/" . $this->name;
-	}
+    public function getRelativePath()
+    {
+        if (empty($this->parent) || $this->parent == "/")
+            return $this->name;
+        else
+            return $this->parent . "/" . $this->name;
+    }
 
-	public function getEncodedRelativePath()
-	{
-		$relPath = self::getRelativePath();
-		// Encode the individual parts of the path only (so we will not encode the path separator)
-		return implode('/', array_map(function ($v) {
-			return rawurlencode($v);
-		}, explode('/', $relPath)));
-	}
+    public function getEncodedRelativePath()
+    {
+        $relPath = self::getRelativePath();
+        // Encode the individual parts of the path only (so we will not encode the path separator)
+        return implode('/', array_map(function ($v) {
+            return rawurlencode($v);
+        }, explode('/', $relPath)));
+    }
 }
 ?>

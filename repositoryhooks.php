@@ -26,7 +26,7 @@ include("include/config.inc.php");
 $engine = \svnadmin\core\Engine::getInstance();
 
 if (!$engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)) {
-	$engine->forwardError(ERROR_INVALID_MODULE);
+    $engine->forwardError(ERROR_INVALID_MODULE);
 }
 
 $engine->checkUserAuthentication(true, ACL_MOD_REPO, ACL_ACTION_VIEW);
@@ -48,7 +48,7 @@ $varRepo = rawurldecode($varRepoEnc);
 //
 
 if (check_request_var('save')) {
-	$engine->handleAction('save_hook');
+    $engine->handleAction('save_hook');
 }
 
 //
@@ -67,25 +67,25 @@ $hasSelectedHook = false;
 $canEdit = IsProviderActive(PROVIDER_REPOSITORY_EDIT) && $engine->isCurrentUserAdmin();
 
 try {
-	if ($varSelectedHookEnc != null) {
-		$selectedHook = rawurldecode($varSelectedHookEnc);
-		$hookContent = $engine->getRepositoryEditProvider()->getHookContent($oR, $selectedHook);
-		$isNew = false;
-		$hasSelectedHook = true;
-		$selectedHookReadOnly = (substr($selectedHook, -5) === '.tmpl');
-	}
+    if ($varSelectedHookEnc != null) {
+        $selectedHook = rawurldecode($varSelectedHookEnc);
+        $hookContent = $engine->getRepositoryEditProvider()->getHookContent($oR, $selectedHook);
+        $isNew = false;
+        $hasSelectedHook = true;
+        $selectedHookReadOnly = (substr($selectedHook, -5) === '.tmpl');
+    }
 
-	$hookList = $engine->getRepositoryEditProvider()->listHooks($oR);
-	foreach ($hookList as $hook) {
-		if ($hook->isTemplate) {
-			$templateHookList[] = $hook;
-		} else {
-			$activeHookList[] = $hook;
-		}
-	}
+    $hookList = $engine->getRepositoryEditProvider()->listHooks($oR);
+    foreach ($hookList as $hook) {
+        if ($hook->isTemplate) {
+            $templateHookList[] = $hook;
+        } else {
+            $activeHookList[] = $hook;
+        }
+    }
 }
 catch (Exception $ex) {
-	$engine->addException($ex);
+    $engine->addException($ex);
 }
 
 SetValue('Repository', $oR);

@@ -26,7 +26,7 @@ $appTR->loadModule("accesspathcreate");
 $create = check_request_var('create');
 if( $create )
 {
-	$appEngine->handleAction('create_accesspath');
+    $appEngine->handleAction('create_accesspath');
 }
 
 // HTTP request parameters.

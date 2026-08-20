@@ -34,9 +34,9 @@
 <tfoot>
   <tr>
     <td>
-    	<?php if (GetBoolValue("RepositoryRoot")) { ?>
+        <?php if (GetBoolValue("RepositoryRoot")) { ?>
       <a href="repositorylist.php"><img src="templates/icons/back.png" alt="TR{Back}}"></a>
-    	<?php } else { ?>
+        <?php } else { ?>
       <a href="repositoryview.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;p=<?php PrintStringValue("BackLinkPathEncoded"); ?>"><img src="templates/icons/back.png" alt="<?php Translate("Back"); ?>"></a>
       <?php } ?>
     </td>
@@ -55,7 +55,7 @@
   <tr>
     <td>
       <?php if (IsProviderActive(PROVIDER_ACCESSPATH_EDIT) && HasAccess(ACL_MOD_ACCESSPATH, ACL_ACTION_ADD)) { ?>
-	    <a href="accesspathcreate.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;p=<?php print($item->getEncodedRelativePath()); ?>"><img src="templates/icons/addpath.png" alt="-" title="<?php Translate("Add access path"); ?>"></a>
+        <a href="accesspathcreate.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;p=<?php print($item->getEncodedRelativePath()); ?>"><img src="templates/icons/addpath.png" alt="-" title="<?php Translate("Add access path"); ?>"></a>
       <?php } ?>
     </td>
     <td>
@@ -66,17 +66,17 @@
       <?php } ?>
     </td>
     <td>
-    	<?php if ($item->type == 0) { ?>
+        <?php if ($item->type == 0) { ?>
       <a href="repositoryview.php?pi=<?php print(GetValue("Repository")->getEncodedParentIdentifier()); ?>&amp;r=<?php print(GetValue("Repository")->getEncodedName()); ?>&amp;p=<?php print($item->getEncodedRelativePath()); ?>"><?php print($item->name); ?></a>
       <?php } else { ?>
-			<?php print($item->name); ?>
+            <?php print($item->name); ?>
       <?php } ?>
     </td>
     <td>
-    	<?php print($item->author); ?>
+        <?php print($item->author); ?>
     </td>
     <td align="right">
-    	<?php print($item->revision); ?>
+        <?php print($item->revision); ?>
     </td>
     <?php if (GetBoolValue("ApacheWebLink") || GetBoolValue("CustomWebLink")) { ?>
     <td align="center">

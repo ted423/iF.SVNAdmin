@@ -21,38 +21,38 @@ namespace svnadmin\providers;
 
 class EngineBaseAuthenticator implements \svnadmin\core\interfaces\IAuthenticator
 {
-	/**
-	 * (non-PHPdoc)
-	 * @see svnadmin\core\interfaces.IAuthenticator::init()
-	 */
-	public function init()
-	{
-		return true;
+    /**
+     * (non-PHPdoc)
+     * @see svnadmin\core\interfaces.IAuthenticator::init()
+     */
+    public function init()
+    {
+        return true;
     }
 
     /**
      * (non-PHPdoc)
      * @see svnadmin\core\interfaces.IAuthenticator::authenticate()
      */
-	public function authenticate($objUser, $password)
-	{
-		$E = \svnadmin\core\Engine::getInstance();
+    public function authenticate($objUser, $password)
+    {
+        $E = \svnadmin\core\Engine::getInstance();
 
-		// Check for permission of current user.
-		// If the user shouldn't have permission, we do not need to use the
-		// authentication function.
-		if (!$E->getAclManager()->hasPermission($objUser, \ACL_MOD_BASIC, \ACL_ACTION_LOGIN))
-		{
-			return false;
-		}
+        // Check for permission of current user.
+        // If the user shouldn't have permission, we do not need to use the
+        // authentication function.
+        if (!$E->getAclManager()->hasPermission($objUser, \ACL_MOD_BASIC, \ACL_ACTION_LOGIN))
+        {
+            return false;
+        }
 
-		// Correct user/pass combination?
-		if (!$E->getUserViewProvider()->authenticate($objUser, $password))
-		{
-			return false;
-		}
+        // Correct user/pass combination?
+        if (!$E->getUserViewProvider()->authenticate($objUser, $password))
+        {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 }
 ?>

@@ -54,8 +54,8 @@ if (!file_exists("./data/config.ini"))
 $ifcorelib_path = "./include/ifcorelib/";
 include_once($ifcorelib_path."globals.php");
 include_once($ifcorelib_path."IF_StringUtils.class.php");
-include_once($ifcorelib_path."IF_IniFile.func.php");	// TODO: Remove include.
-include_once($ifcorelib_path."IF_IniFile.class.php");	// TODO: Remove include.
+include_once($ifcorelib_path."IF_IniFile.func.php");    // TODO: Remove include.
+include_once($ifcorelib_path."IF_IniFile.class.php");    // TODO: Remove include.
 include_once($ifcorelib_path."IF_Config.class.php");
 include_once($ifcorelib_path."IF_SVNBaseC.class.php");
 include_once($ifcorelib_path."IF_SVNAuthFileC.class.php");
@@ -96,7 +96,7 @@ include_once( "./classes/core/Exceptions.class.php" );
 
 if ((@include_once("src/adLDAP.php")) == TRUE)
 {
-	define("FOUND_LIBRARY_ADLDAP", TRUE);
+    define("FOUND_LIBRARY_ADLDAP", TRUE);
 }
 
 /**
@@ -122,17 +122,17 @@ define("ACL_MOD_PROJECTMANAGER",       "projectmanagers");
 /**
  * Constant ACL actions.
  */
-define("ACL_ACTION_VIEW",				"view");
-define("ACL_ACTION_ADD",				"add");
-define("ACL_ACTION_DELETE",				"delete");
-define("ACL_ACTION_ASSIGN",				"assign");
-define("ACL_ACTION_UNASSIGN",			"unassign");
-define("ACL_ACTION_LOGIN",				"login");			// ACL_MOD_BASIC only!
-define("ACL_ACTION_CHANGEPASS",			"changepass");		// ACL_MOD_USER only!
-define("ACL_ACTION_CHANGEPASS_OTHER",	"changepassother");	// ACL_MOD_USER only!
-define("ACL_ACTION_SYNCHRONIZE",		"synchronize");		// ACL_MOD_UPDATE only!
-define("ACL_ACTION_CHANGE",				"change");			// ACL_MOD_SETTINGS only (atm...)!
-define("ACL_ACTION_DUMP",				"dump");			// ACL_MOD_REPO
+define("ACL_ACTION_VIEW",                "view");
+define("ACL_ACTION_ADD",                "add");
+define("ACL_ACTION_DELETE",                "delete");
+define("ACL_ACTION_ASSIGN",                "assign");
+define("ACL_ACTION_UNASSIGN",            "unassign");
+define("ACL_ACTION_LOGIN",                "login");            // ACL_MOD_BASIC only!
+define("ACL_ACTION_CHANGEPASS",            "changepass");        // ACL_MOD_USER only!
+define("ACL_ACTION_CHANGEPASS_OTHER",    "changepassother");    // ACL_MOD_USER only!
+define("ACL_ACTION_SYNCHRONIZE",        "synchronize");        // ACL_MOD_UPDATE only!
+define("ACL_ACTION_CHANGE",                "change");            // ACL_MOD_SETTINGS only (atm...)!
+define("ACL_ACTION_DUMP",                "dump");            // ACL_MOD_REPO
 define("ACL_ACTION_ASSIGN_ADMIN_ROLE", "assignadmin"); // ACL_MOD_ROLE
 define("ACL_ACTION_UNASSIGN_ADMIN_ROLE", "unassignadmin"); // ACL_MOD_ROLE
 
@@ -194,20 +194,20 @@ elseif ($cfg->getValue("Engine:Providers", "UserViewProviderType") == "digest")
 }
 elseif ($cfg->getValue("Engine:Providers", "UserViewProviderType") == "ldap")
 {
-	$userView = null;
-	include_once("./classes/providers/ldap/LdapUserViewProvider.class.php");
+    $userView = null;
+    include_once("./classes/providers/ldap/LdapUserViewProvider.class.php");
 
-	if ($cfg->getValueAsBoolean('Ldap', 'CacheEnabled', false)) {
-		include_once("./classes/providers/ldap/CachedLdapUserViewProvider.class.php");
-		include_once("./include/ifcorelib/IF_JsonObjectStorage.class.php");
-		$userView = \svnadmin\providers\ldap\CachedLdapUserViewProvider::getInstance();
-	}
-	else {
-		$userView = \svnadmin\providers\ldap\LdapUserViewProvider::getInstance();
-	}
+    if ($cfg->getValueAsBoolean('Ldap', 'CacheEnabled', false)) {
+        include_once("./classes/providers/ldap/CachedLdapUserViewProvider.class.php");
+        include_once("./include/ifcorelib/IF_JsonObjectStorage.class.php");
+        $userView = \svnadmin\providers\ldap\CachedLdapUserViewProvider::getInstance();
+    }
+    else {
+        $userView = \svnadmin\providers\ldap\LdapUserViewProvider::getInstance();
+    }
 
-	$userView->setUserViewEnabled(true);
-	$appEngine->setUserViewProvider( $userView );
+    $userView->setUserViewEnabled(true);
+    $appEngine->setUserViewProvider( $userView );
 }
 
 /**
@@ -240,21 +240,21 @@ if ($cfg->getValue("Engine:Providers", "GroupViewProviderType") == "svnauthfile"
 }
 elseif($cfg->getValue("Engine:Providers", "GroupViewProviderType") == "ldap" && $cfg->getValue("Engine:Providers", "UserViewProviderType") == "ldap")
 {
-	$groupView = null;
-	include_once("./classes/providers/ldap/LdapUserViewProvider.class.php");
-	include_once("./classes/providers/AuthFileGroupAndPathsProvider.class.php");
+    $groupView = null;
+    include_once("./classes/providers/ldap/LdapUserViewProvider.class.php");
+    include_once("./classes/providers/AuthFileGroupAndPathsProvider.class.php");
 
-	if ($cfg->getValueAsBoolean('Ldap', 'CacheEnabled', false)) {
-		include_once("./classes/providers/ldap/CachedLdapUserViewProvider.class.php");
-		include_once("./include/ifcorelib/IF_JsonObjectStorage.class.php");
-		$groupView = \svnadmin\providers\ldap\CachedLdapUserViewProvider::getInstance();
-	}
-	else {
-		$groupView = \svnadmin\providers\ldap\LdapUserViewProvider::getInstance();
-	}
+    if ($cfg->getValueAsBoolean('Ldap', 'CacheEnabled', false)) {
+        include_once("./classes/providers/ldap/CachedLdapUserViewProvider.class.php");
+        include_once("./include/ifcorelib/IF_JsonObjectStorage.class.php");
+        $groupView = \svnadmin\providers\ldap\CachedLdapUserViewProvider::getInstance();
+    }
+    else {
+        $groupView = \svnadmin\providers\ldap\LdapUserViewProvider::getInstance();
+    }
 
-	$groupView->setGroupViewEnabled(true);
-	$appEngine->setGroupViewProvider($groupView);
+    $groupView->setGroupViewEnabled(true);
+    $appEngine->setGroupViewProvider($groupView);
 }
 
 /**
@@ -354,15 +354,15 @@ if ($appEngine->isAuthenticationActive() && $appCurrentScriptFile != "settings.p
 
 if (isset($_COOKIE["locale"]) && !empty($_COOKIE["locale"]))
 {
-	// Get locale from user cookie.
-	$appTR->setCurrentLocale($_COOKIE["locale"]);
+    // Get locale from user cookie.
+    $appTR->setCurrentLocale($_COOKIE["locale"]);
 }
 else
 {
-	// Fallback to default locale.
-	$appTR->setCurrentLocale(
-			$appEngine->getConfig()->getValue("GUI", "DefaultLocale", "en_US")
-		);
+    // Fallback to default locale.
+    $appTR->setCurrentLocale(
+            $appEngine->getConfig()->getValue("GUI", "DefaultLocale", "en_US")
+        );
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -375,7 +375,7 @@ else
 
 if (true)
 {
-	SetValue("LocaleList", $appTR->getAvailableLocales());
+    SetValue("LocaleList", $appTR->getAvailableLocales());
 }
 
 $appTR->loadModule("global");

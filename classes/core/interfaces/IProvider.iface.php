@@ -21,10 +21,10 @@ namespace svnadmin\core\interfaces;
 
 interface IProvider
 {
-	/**
-	 * Initializes the object.
-	 * @return bool
-	 */
-	public function init();
+    /**
+     * Initializes the object.
+     * @return bool
+     */
+    public function init();
 }
 ?>

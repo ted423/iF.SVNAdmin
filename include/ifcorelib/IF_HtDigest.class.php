@@ -23,61 +23,61 @@
  */
 class IF_HtDigest
 {
-	// The digest realm
-	private $m_realm = '';
-	
-	// Holds the user file as an array (username=>pwd-hash) that are part of this realm
-	private $m_data = array();
-	private $m_rawData = array();
-	
-	// Holds the user-password-mappings that are not part of this realm
+    // The digest realm
+    private $m_realm = '';
+    
+    // Holds the user file as an array (username=>pwd-hash) that are part of this realm
+    private $m_data = array();
+    private $m_rawData = array();
+    
+    // Holds the user-password-mappings that are not part of this realm
 
-	// Holds the path to the user authentication file.
-	private $m_userfile = NULL;
+    // Holds the path to the user authentication file.
+    private $m_userfile = NULL;
 
-	// Holds the error number, if a error occured.
-	private $m_errno = 0;
+    // Holds the error number, if a error occured.
+    private $m_errno = 0;
 
-	//////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * Creates a new instance of this class and assigns the given
-	 * file as "passwd" file to it.
-	 * 
-	 * @param string $userfile
-	 */
-	public function __construct( $userfile, $realm )
-	{
-		$this->m_userfile = $userfile;
-		$this->m_realm = $realm;
-	}
+    /**
+     * Creates a new instance of this class and assigns the given
+     * file as "passwd" file to it.
+     * 
+     * @param string $userfile
+     */
+    public function __construct( $userfile, $realm )
+    {
+        $this->m_userfile = $userfile;
+        $this->m_realm = $realm;
+    }
 
-	/**
-	 * Loads the file content and does some init operations.
-	 * 
-	 * @return void
-	 */
+    /**
+     * Loads the file content and does some init operations.
+     * 
+     * @return void
+     */
   public function init()
   {
-  	$b = self::parseUserFile( $this->m_userfile );
-  	return $b;
+      $b = self::parseUserFile( $this->m_userfile );
+      return $b;
   }
 
   public function errno()
   {
-  	return $this->m_errno;
+      return $this->m_errno;
   }
 
   public function error()
   {
-  	switch( $this->m_errno )
-  	{
-  		case 1: return "The user authentication file does not exist.";
-  		case 2: return "No READ permission on the user authentication file.";
-  		case 10: return "The user already exists.";
-  		case 11: return "The user does not exist.";
-  		default: return "No error occured.";
-  	}
+      switch( $this->m_errno )
+      {
+          case 1: return "The user authentication file does not exist.";
+          case 2: return "No READ permission on the user authentication file.";
+          case 10: return "The user already exists.";
+          case 11: return "The user does not exist.";
+          default: return "No error occured.";
+      }
   }
 
   /**
@@ -87,12 +87,12 @@ class IF_HtDigest
    */
   public function getUserList()
   {
-  	$retUsers = array();
-  	foreach( $this->m_data as $username=>$pass )
-  	{
-  		array_push( $retUsers, $username );
-  	}
-  	return $retUsers;
+      $retUsers = array();
+      foreach( $this->m_data as $username=>$pass )
+      {
+          array_push( $retUsers, $username );
+      }
+      return $retUsers;
   }
 
   /**
@@ -107,12 +107,12 @@ class IF_HtDigest
   {
     if( self::userExists( $username ) )
     {
-    	// The user already exists.
+        // The user already exists.
       $this->m_errno = 10;
       return false;
     }
 
-  	// Add the user to the holded data array.
+      // Add the user to the holded data array.
     $this->m_data[$username] = self::digest_password($username, $password);
     return true;
   }
@@ -132,13 +132,13 @@ class IF_HtDigest
   {
     if( !self::userExists( $username ) )
     {
-    	// The user does not exists.
-    	$this->m_errno = 11;
-    	return false;
+        // The user does not exists.
+        $this->m_errno = 11;
+        return false;
     }
     else
     {
-    	// Unset user.
+        // Unset user.
       unset( $this->m_data[$username] );
       return true;
     }
@@ -146,25 +146,25 @@ class IF_HtDigest
 
   public function userExists( $username )
   {
-  	if( isset( $this->m_data[$username] ) && !empty( $this->m_data[$username] ) )
-  	{
-  		return true;
-  	}
-  	else
-  	{
-  		return false;
-  	}
+      if( isset( $this->m_data[$username] ) && !empty( $this->m_data[$username] ) )
+      {
+          return true;
+      }
+      else
+      {
+          return false;
+      }
   }
   
   public function authenticate( $username, $password )
   {
-	  if(self::userExists( $username ))
-		{
-	    $pass = &$this->m_data[$username];
-	    $password_digest = self::digest_password($username, $password);
-	
-	    return ($password_digest == $pass);
-		}
+      if(self::userExists( $username ))
+        {
+        $pass = &$this->m_data[$username];
+        $password_digest = self::digest_password($username, $password);
+    
+        return ($password_digest == $pass);
+        }
     // User not found.
     return false;
   }
@@ -182,16 +182,16 @@ class IF_HtDigest
   {
     if( !file_exists( $userfile ) )
     {
-    	// File does not exist.
-    	$this->m_errno = 1;
-    	return false;
+        // File does not exist.
+        $this->m_errno = 1;
+        return false;
     }
 
     if( !is_readable( $userfile  ) )
     {
-    	// No permission to read the file.
-    	$this->m_errno = 2;
-    	return false;
+        // No permission to read the file.
+        $this->m_errno = 2;
+        return false;
     }
 
     // Open file in read-mode.
@@ -206,7 +206,7 @@ class IF_HtDigest
 
       if( empty( $line ) )
       {
-      	continue;
+          continue;
       }
 
       // Split the line by ':'.
@@ -215,17 +215,17 @@ class IF_HtDigest
       // [2] = Hashed password
       $values = explode( ":", $line );
 
-			if (count($values) == 3)
-			{
-			 if ($values[1] == $this->m_realm)
-			 {
-			   $this->m_data[$values[0]] = $values[2];
-			 }
-			 else
-			 {
-			   $this->m_rawData[] = $line;
-			 }
-			}
+            if (count($values) == 3)
+            {
+             if ($values[1] == $this->m_realm)
+             {
+               $this->m_data[$values[0]] = $values[2];
+             }
+             else
+             {
+               $this->m_rawData[] = $line;
+             }
+            }
     }
     flock( $fh, LOCK_UN );
     fclose( $fh );
@@ -253,7 +253,7 @@ class IF_HtDigest
       $line = $usr.":".$this->m_realm.':'.$pwd."\n";
       fwrite( $fh, $line, strlen( $line ) );
     }
-	
+    
     foreach( $this->m_rawData as $line )
     {
       $line = $line."\n";

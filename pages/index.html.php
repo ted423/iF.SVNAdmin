@@ -1,7 +1,7 @@
 <?php GlobalHeader(); ?>
 
 <h1>
-	<?php Translate("Welcome"); ?>
+    <?php Translate("Welcome"); ?>
   <?php if (IsUserLoggedIn()) { ?><?php SessionUsername(); ?><?php } ?>
 </h1>
 

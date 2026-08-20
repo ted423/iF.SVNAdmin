@@ -25,11 +25,11 @@ $appTR->loadModule("accesspathview");
 // Action handling.
 if (check_request_var("unassign"))
 {
-	$appEngine->handleAction("unassign_permission");
+    $appEngine->handleAction("unassign_permission");
 }
 elseif (check_request_var("assign_permission"))
 {
-	$appEngine->handleAction("assign_usergrouptoaccesspath");
+    $appEngine->handleAction("assign_usergrouptoaccesspath");
 }
 
 // Get required variables.
@@ -47,19 +47,19 @@ $groups = $appEngine->getAccessPathViewProvider()->getGroupsOfPath($o);
 // Data to assign new group permissions.
 if ($appEngine->isAccessPathEditActive() && $appEngine->checkUserAccess(ACL_MOD_ACCESSPATH, ACL_ACTION_ASSIGN))
 {
-	if ($appEngine->isUserViewActive())
-	{
-		$allusers = $appEngine->getUserViewProvider()->getUsers();
-		usort($allusers, array('\svnadmin\core\entities\User',"compare"));
-		SetValue("UserListAll", $allusers);
-	}
+    if ($appEngine->isUserViewActive())
+    {
+        $allusers = $appEngine->getUserViewProvider()->getUsers();
+        usort($allusers, array('\svnadmin\core\entities\User',"compare"));
+        SetValue("UserListAll", $allusers);
+    }
 
-	if ($appEngine->isGroupViewActive())
-	{
-		$allgroups = $appEngine->getGroupViewProvider()->getGroups();
-		usort($allgroups, array('\svnadmin\core\entities\Group',"compare"));
-		SetValue("GroupListAll", $allgroups);
-	}
+    if ($appEngine->isGroupViewActive())
+    {
+        $allgroups = $appEngine->getGroupViewProvider()->getGroups();
+        usort($allgroups, array('\svnadmin\core\entities\Group',"compare"));
+        SetValue("GroupListAll", $allgroups);
+    }
 }
 
 SetValue("PermNone", \svnadmin\core\entities\Permission::$PERM_NONE);

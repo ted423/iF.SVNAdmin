@@ -340,30 +340,30 @@ namespace svnadmin\core\acl
      */
     public function getUsersOfAccessPath($path)
     {
-    	$list = array();
-    	if ($this->assignments == null)
-    	  return $list;
+        $list = array();
+        if ($this->assignments == null)
+          return $list;
 
-    	// Iterate all AccessPaths sections and search for matching of $path.
-    	foreach ($this->assignments as $sec => &$key)
-    	{
-    		$pos = null;
-    		if (($pos=strpos($sec, $this->path_postfix)) !== false)
-    		{
-    			$idx = 0;
-    			while (isset($this->assignments[$sec][$idx]))
-    			{
-    				if ($this->assignments[$sec][$idx] == $path)
-    				{
-    					// Extract username from section head.
-    					$username = substr($sec, 0, $pos);
-    					$list[] = $username;
-    				}
-    				$idx++;
-    			}
-    		}
-    	}
-    	return $list;
+        // Iterate all AccessPaths sections and search for matching of $path.
+        foreach ($this->assignments as $sec => &$key)
+        {
+            $pos = null;
+            if (($pos=strpos($sec, $this->path_postfix)) !== false)
+            {
+                $idx = 0;
+                while (isset($this->assignments[$sec][$idx]))
+                {
+                    if ($this->assignments[$sec][$idx] == $path)
+                    {
+                        // Extract username from section head.
+                        $username = substr($sec, 0, $pos);
+                        $list[] = $username;
+                    }
+                    $idx++;
+                }
+            }
+        }
+        return $list;
     }
 
     /**
@@ -556,15 +556,15 @@ namespace svnadmin\core\acl
      */
     public function load()
     {
-    	// Create the user-to-role file.
-    	if (!file_exists($this->user_role_file))
-    	{
-    		// Create the file.
-    		if (!touch($this->user_role_file))
-    		{
-    		  throw new Exception("The file is not writable: ".$this->user_role_file);
-    		}
-    	}
+        // Create the user-to-role file.
+        if (!file_exists($this->user_role_file))
+        {
+            // Create the file.
+            if (!touch($this->user_role_file))
+            {
+              throw new Exception("The file is not writable: ".$this->user_role_file);
+            }
+        }
 
       // Load the default ACL object.
       $this->acl = self::getDefaultAcl();
