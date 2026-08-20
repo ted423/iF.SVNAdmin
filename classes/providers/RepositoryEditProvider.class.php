@@ -354,6 +354,8 @@ class RepositoryEditProvider implements \svnadmin\core\interfaces\IRepositoryEdi
 		}
 
 		$file = $hooksPath . '/' . $hookName;
+		$content = str_replace("\r\n", "\n", $content);
+		$content = str_replace("\r", "\n", $content);
 		if (file_put_contents($file, $content) === false) {
 			throw new \Exception(tr("Could not write hook file."));
 		}
