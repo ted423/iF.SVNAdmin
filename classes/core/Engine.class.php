@@ -411,6 +411,35 @@ class Engine
 	}
 
 	/**
+	 * Checks whether the current logged in user has the administrator role.
+	 *
+	 * If authentication is disabled, every user is treated as administrator.
+	 *
+	 * @return bool
+	 */
+	public function isCurrentUserAdmin()
+	{
+		if ($this->m_acl_manager === null)
+			return true;
+
+		$username = $this->getSessionUsername();
+		if ($username === null)
+			return false;
+
+		$acl = $this->getAclManager();
+		$user = new \svnadmin\core\entities\User();
+		$user->name = $username;
+
+		$roles = $acl->getRolesOfUser($user);
+		foreach ($roles as $role)
+		{
+			if ($acl->isAdminRole($role))
+				return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Gets the name of the current logged in user.
 	 *
 	 * @return string

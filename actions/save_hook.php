@@ -31,7 +31,10 @@ if (!$engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)) {
 	$engine->forwardError(ERROR_INVALID_MODULE);
 }
 
-$engine->checkUserAuthentication(true, ACL_MOD_REPO, ACL_ACTION_ADD);
+$engine->checkUserAuthentication(true);
+if (!$engine->isCurrentUserAdmin()) {
+	$engine->forwardError(ERROR_NO_ACCESS);
+}
 
 //
 // HTTP Request Vars
