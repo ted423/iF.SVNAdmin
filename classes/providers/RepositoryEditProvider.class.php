@@ -245,5 +245,141 @@ class RepositoryEditProvider implements \svnadmin\core\interfaces\IRepositoryEdi
 		
 		return $v;
 	}
+
+	/**
+	 * Gets the absolute filesystem path of the given repository.
+	 *
+	 * @param \svnadmin\core\entities\Repository $oRepository
+	 * @return string
+	 * @throws \Exception
+	 */
+	public function getRepositoryPath(\svnadmin\core\entities\Repository $oRepository)
+	{
+		$svnParentPath = $this->getRepositoryConfigValue($oRepository, 'SVNParentPath');
+		if ($svnParentPath == NULL) {
+			throw new \Exception('Invalid parent-identifier: ' .
+					$oRepository->getParentIdentifier());
+		}
+		return $svnParentPath . '/' . $oRepository->name;
+	}
+
+	/**
+	 * Gets the absolute filesystem path to the hooks directory.
+	 *
+	 * @param \svnadmin\core\entities\Repository $oRepository
+	 * @return string
+	 */
+	public function getHooksPath(\svnadmin\core\entities\Repository $oRepository)
+	{
+		return $this->getRepositoryPath($oRepository) . '/hooks';
+	}
+
+	/**
+	 * Lists the files in the hooks directory of the given repository.
+	 *
+	 * @param \svnadmin\core\entities\Repository $oRepository
+	 * @return array
+	 */
+	public function listHooks(\svnadmin\core\entities\Repository $oRepository)
+	{
+		$hooksPath = $this->getHooksPath($oRepository);
+		$ret = array();
+
+		if (is_dir($hooksPath)) {
+			$items = scandir($hooksPath);
+			foreach ($items as $item) {
+				if ($item == '.' || $item == '..') {
+					continue;
+				}
+				$fullPath = $hooksPath . '/' . $item;
+				if (is_file($fullPath)) {
+					$h = new \stdClass();
+					$h->name = $item;
+					$h->encodedName = rawurlencode($item);
+					$h->size = filesize($fullPath);
+					$h->isTemplate = (substr($item, -5) === '.tmpl');
+					$ret[] = $h;
+				}
+			}
+		}
+
+		return $ret;
+	}
+
+	/**
+	 * Reads the content of a hook file.
+	 *
+	 * @param \svnadmin\core\entities\Repository $oRepository
+	 * @param string $hookName
+	 * @return string
+	 * @throws \Exception
+	 */
+	public function getHookContent(\svnadmin\core\entities\Repository $oRepository, $hookName)
+	{
+		if (!$this->isValidHookName($hookName)) {
+			throw new \Exception(tr("Invalid hook name."));
+		}
+
+		$file = $this->getHooksPath($oRepository) . '/' . $hookName;
+		if (!is_file($file)) {
+			return '';
+		}
+
+		return file_get_contents($file);
+	}
+
+	/**
+	 * Saves the content of a hook file.
+	 *
+	 * @param \svnadmin\core\entities\Repository $oRepository
+	 * @param string $hookName
+	 * @param string $content
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public function saveHook(\svnadmin\core\entities\Repository $oRepository, $hookName, $content)
+	{
+		if (!$this->isValidHookName($hookName)) {
+			throw new \Exception(tr("Invalid hook name."));
+		}
+		if (substr($hookName, -5) === '.tmpl') {
+			throw new \Exception(tr("Subversion hook templates are read-only."));
+		}
+
+		$hooksPath = $this->getHooksPath($oRepository);
+		if (!is_dir($hooksPath)) {
+			if (!mkdir($hooksPath, 0755, true)) {
+				throw new \Exception(tr("Could not create hooks directory."));
+			}
+		}
+
+		$file = $hooksPath . '/' . $hookName;
+		$content = str_replace("\r\n", "\n", $content);
+		$content = str_replace("\r", "\n", $content);
+		if (file_put_contents($file, $content) === false) {
+			throw new \Exception(tr("Could not write hook file."));
+		}
+
+		// Make the hook executable on non-Windows systems.
+		if (stripos(PHP_OS, 'WIN') === false) {
+			chmod($file, 0755);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Validates a hook file name.
+	 *
+	 * @param string $hookName
+	 * @return bool
+	 */
+	protected function isValidHookName($hookName)
+	{
+		if ($hookName == '.' || $hookName == '..') {
+			return false;
+		}
+		return (bool) preg_match('/^[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*$/', $hookName);
+	}
 }
 ?>

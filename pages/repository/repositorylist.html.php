@@ -85,6 +85,9 @@
 						<img src="templates/icons/exportdump.png" border="0" alt="<?php Translate("Dump"); ?>" title="<?php Translate("Export dump"); ?>">
 					</a>
 					<?php endif; ?>
+					<?php if (GetBoolValue("ShowHooksOption")) : ?>
+					<a href="repositoryhooks.php?pi=<?php print($r->getEncodedParentIdentifier()); ?>&amp;r=<?php print($r->getEncodedName()); ?>"><?php Translate("Hooks"); ?></a>
+					<?php endif; ?>
 				</td>
 				<?php endif; ?>
 			</tr>

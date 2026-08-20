@@ -65,12 +65,22 @@ try {
 	}
 	
 	// Show options column?
-	if (($engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)
+	$showOptions = false;
+	if ($engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)
 		&& $engine->hasPermission(ACL_MOD_REPO, ACL_ACTION_DUMP)
 		&& $engine->getConfig()->getValueAsBoolean('GUI', 'RepositoryDumpEnabled', false))
-		){
-		SetValue('ShowOptions', true);
+	{
+		$showOptions = true;
 		SetValue('ShowDumpOption', true);
+	}
+	if ($engine->isProviderActive(PROVIDER_REPOSITORY_EDIT)
+		&& $engine->hasPermission(ACL_MOD_REPO, ACL_ACTION_VIEW))
+	{
+		$showOptions = true;
+		SetValue('ShowHooksOption', true);
+	}
+	if ($showOptions) {
+		SetValue('ShowOptions', true);
 	}
 }
 catch (Exception $ex) {
