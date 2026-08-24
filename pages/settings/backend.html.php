@@ -30,7 +30,18 @@ $(document).ready(function(){
     testSettings("SvnAdminExecutable", {SvnAdminExecutable: $("#SvnAdminExecutable").val()}, "#SvnAdminExecutableTestResult");
   });
 
+  function updateLdapTestButtons() {
+    var disabled = ($("#LdapHostAddress").val().trim() === "");
+    $("#LdapConnectTest").prop("disabled", disabled);
+    $("#LdapUserTest").prop("disabled", disabled);
+    $("#LdapGroupTest").prop("disabled", disabled);
+  }
+
+  updateLdapTestButtons();
+  $("#LdapHostAddress").on("input change", updateLdapTestButtons);
+
   $('#LdapConnectTest').click(function(){
+    if ($("#LdapHostAddress").val().trim() === "") return;
     testSettings("LdapConnection",
     {LdapHostAddress: $("#LdapHostAddress").val(), LdapProtocolVersion: $("#LdapProtocolVersion").val(),
      LdapBindDN: $("#LdapBindDN").val(), LdapBindPassword: $("#LdapBindPassword").val()},
@@ -38,6 +49,7 @@ $(document).ready(function(){
   });
 
   $('#LdapUserTest').click(function(){
+    if ($("#LdapHostAddress").val().trim() === "") return;
     testSettings("LdapUser",
     {LdapHostAddress: $("#LdapHostAddress").val(), LdapProtocolVersion: $("#LdapProtocolVersion").val(),
      LdapBindDN: $("#LdapBindDN").val(), LdapBindPassword: $("#LdapBindPassword").val(),
@@ -47,6 +59,7 @@ $(document).ready(function(){
   });
 
   $('#LdapGroupTest').click(function(){
+    if ($("#LdapHostAddress").val().trim() === "") return;
     testSettings("LdapGroup",
     {LdapHostAddress: $("#LdapHostAddress").val(), LdapProtocolVersion: $("#LdapProtocolVersion").val(),
      LdapBindDN: $("#LdapBindDN").val(), LdapBindPassword: $("#LdapBindPassword").val(),
